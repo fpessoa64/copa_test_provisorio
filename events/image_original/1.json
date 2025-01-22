@@ -1,0 +1,80 @@
+{
+    "component_input": "component_678d5279b19d18bed72e3a4b",
+    "component_output": "component_671954a3fe70f9afbd170fa2",
+    "env_var": {
+        "edge_id": "67863e1a5106660013816946",
+        "edge_name": "test_dev_copa_40",
+        "flow_id": "671953f155784c001a41d0dc"
+    },
+    "flow_test": false,
+    "frame_clock": 615364815758.329,
+    "frame_height": 134,
+    "frame_id": "12233444444",
+    "frame_mat_type": 16,
+    "frame_seq": 0,
+    "frame_status": "OK",
+    "frame_time": 1737490271.3334193,
+    "frame_width": 216,
+    "input_frame_size": [
+        1848,
+        1149
+    ],
+    "input_label": "input_endpoint",
+    "input_name": "input_endpoint",
+    "input_window": [
+        [
+            1623,
+            104
+        ],
+        [
+            1839,
+            238
+        ]
+    ],
+    "inspection_id": "213456789",
+    "output_data": {
+        "component_671954a3fe70f9afbd170fa2": {
+            "component_id": "671954a3fe70f9afbd170fa2",
+            "component_name": "CUTTER",
+            "dataset_id": "66d9c4c5cadd295326d44783",
+            "draw_format": "box",
+            "draw_output": true,
+            "flow_component_id": "5d96674dc00beadd67156657",
+            "flow_component_name": "roi_cutter",
+            "input_window": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    1848,
+                    1149
+                ]
+            ],
+            "line_width": 1,
+            "name": "CUTTER",
+            "outputs": [
+                {
+                    "bbox": {
+                        "x_max": 1839,
+                        "x_min": 1623,
+                        "y_max": 238,
+                        "y_min": 104
+                    },
+                    "bbox_normalized": {
+                        "x_max": 0.9951298701298701,
+                        "x_min": 0.8782467532467533,
+                        "y_max": 0.2071366405570061,
+                        "y_min": 0.09051348999129678
+                    },
+                    "class": "669e60125312469a1ac328dd",
+                    "color": "#00bcd4",
+                    "confidence": 0.878,
+                    "label": "LIQUIGAS"
+                }
+            ],
+            "text_format": "{label}",
+            "type": "cutter"
+        }
+    }
+}

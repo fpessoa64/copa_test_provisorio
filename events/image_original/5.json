@@ -1,0 +1,192 @@
+{
+    "component_input": "component_671954a3fe70f9afbd170fa2",
+    "component_output": "component_674e3d4657d99843339f626e",
+    "env_var": {
+        "edge_id": "67863e1a5106660013816946",
+        "edge_name": "test_dev_copa_40",
+        "flow_id": "671953f155784c001a41d0dc"
+    },
+    "flow_test": false,
+    "frame_clock": 615364815758.329,
+    "frame_height": 124,
+    "frame_id": "12233444444",
+    "frame_mat_type": 16,
+    "frame_seq": 0,
+    "frame_status": "OK",
+    "frame_time": 1737490271.3334193,
+    "frame_width": 124,
+    "input_frame_size": [
+        1848,
+        1149
+    ],
+    "input_label": "input_endpoint",
+    "input_name": "input_endpoint",
+    "input_window": [
+        [
+            506,
+            464
+        ],
+        [
+            630,
+            588
+        ]
+    ],
+    "inspection_id": "213456789",
+    "output_data": {
+        "component_671954a3fe70f9afbd170fa2": {
+            "component_id": "671954a3fe70f9afbd170fa2",
+            "component_name": "CUTTER",
+            "dataset_id": "66d9c4c5cadd295326d44783",
+            "draw_format": "box",
+            "draw_output": true,
+            "flow_component_id": "5d96674dc00beadd67156657",
+            "flow_component_name": "roi_cutter",
+            "input_window": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    1848,
+                    1149
+                ]
+            ],
+            "line_width": 1,
+            "name": "CUTTER",
+            "outputs": [
+                {
+                    "bbox": {
+                        "x_max": 630,
+                        "x_min": 506,
+                        "y_max": 588,
+                        "y_min": 464
+                    },
+                    "bbox_normalized": {
+                        "x_max": 0.3409090909090909,
+                        "x_min": 0.27380952380952384,
+                        "y_max": 0.5117493472584856,
+                        "y_min": 0.40382941688424717
+                    },
+                    "class": "627e64ba9e724e907b67e2e6",
+                    "color": "#ffeb3b",
+                    "confidence": 0.713,
+                    "label": "TARA"
+                }
+            ],
+            "text_format": "{label}",
+            "type": "cutter"
+        },
+        "component_674e3d4657d99843339f626e": {
+            "component_id": "674e3d4657d99843339f626e",
+            "component_name": "TARA",
+            "dataset_id": "65739542e935a8001b1648c7",
+            "draw_format": "box",
+            "draw_function": "boxes",
+            "draw_output": true,
+            "flow_component_id": "638e3bfee0dd9900c5d982ab",
+            "flow_component_name": "roi_detection",
+            "input_window": [
+                [
+                    506,
+                    464
+                ],
+                [
+                    630,
+                    588
+                ]
+            ],
+            "line_width": 1,
+            "name": "TARA",
+            "outputs": {
+                "0": [
+                    {
+                        "bbox": {
+                            "x_max": 618,
+                            "x_min": 598,
+                            "y_max": 528,
+                            "y_min": 489
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.3344155844155844,
+                            "x_min": 0.3235930735930736,
+                            "y_max": 0.4595300261096606,
+                            "y_min": 0.4255874673629243
+                        },
+                        "class": "0",
+                        "color": "#3f51b5",
+                        "confidence": 0.859,
+                        "label": "0"
+                    }
+                ],
+                "1": [
+                    {
+                        "bbox": {
+                            "x_max": 561,
+                            "x_min": 541,
+                            "y_max": 560,
+                            "y_min": 522
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.30357142857142855,
+                            "x_min": 0.29274891774891776,
+                            "y_max": 0.48738033072236725,
+                            "y_min": 0.45430809399477806
+                        },
+                        "class": "1",
+                        "color": "#03a9f4",
+                        "confidence": 0.9,
+                        "label": "1"
+                    }
+                ],
+                "2": [],
+                "3": [],
+                "4": [
+                    {
+                        "bbox": {
+                            "x_max": 579,
+                            "x_min": 560,
+                            "y_max": 550,
+                            "y_min": 515
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.3133116883116883,
+                            "x_min": 0.30303030303030304,
+                            "y_max": 0.47867711053089645,
+                            "y_min": 0.4482158398607485
+                        },
+                        "class": "4",
+                        "color": "#ffeb3b",
+                        "confidence": 0.659,
+                        "label": "4"
+                    }
+                ],
+                "5": [],
+                "6": [],
+                "7": [],
+                "8": [],
+                "9": [
+                    {
+                        "bbox": {
+                            "x_max": 603,
+                            "x_min": 583,
+                            "y_max": 537,
+                            "y_min": 499
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.3262987012987013,
+                            "x_min": 0.31547619047619047,
+                            "y_max": 0.46736292428198434,
+                            "y_min": 0.43429068755439515
+                        },
+                        "class": "9",
+                        "color": "#9c27b0",
+                        "confidence": 0.651,
+                        "label": "9"
+                    }
+                ]
+            },
+            "text_format": "{label}",
+            "type": "annotator"
+        }
+    }
+}

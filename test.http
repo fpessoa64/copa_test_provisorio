@@ -1,0 +1,10 @@
+
+
+GET http://localhost:8002/status
+Content-Type: application/json
+
+###
+POST http://localhost:8002/process_image
+Content-Type: image/image/jpeg
+
+< /workspaces/c++/images/image_1100_2033_LIQUIGAS_20240914_0934360002.jpg

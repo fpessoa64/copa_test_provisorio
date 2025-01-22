@@ -1,0 +1,313 @@
+{
+    "_id": "671953f155784c001a41d0dc",
+    "name": "Tara e vencimento Dev C++",
+    "package": "6099613b20da17001941822e",
+    "version": 3,
+    "modified_date": "2025-01-21T20:10:09.566Z",
+    "creation_date": "2024-10-23T19:52:17.785Z",
+    "description": "Tara e vencimento Dev C++",
+    "user": "61f02c33dbe6e0001a29a41b",
+    "active": true,
+    "nodes": [
+        {
+            "_id": "671954a3fe70f9afbd170fa2",
+            "component_name": "roi_cutter",
+            "component_id": "5d96674dc00beadd67156657",
+            "name": "CUTTER",
+            "description": "Region Of Interest CutterThis component get a frame, locate objects, and ouputs the region where the object is located. It has one output for each object class.Outputs: JSON with class and position {(x_min, y_min), (x_max, y_max)} of every object detected.",
+            "notes": "",
+            "outputs": {
+                "627e64ba9e724e907b67e2e6": {
+                    "color": "#ffeb3b",
+                    "name": "627e64ba9e724e907b67e2e6",
+                    "label": "TARA",
+                    "nodes": [
+                        "674e3d4657d99843339f626e"
+                    ]
+                },
+                "627e66221e4f106a87cd858e": {
+                    "color": "#ff5722",
+                    "name": "627e66221e4f106a87cd858e",
+                    "label": "FERRADURA",
+                    "nodes": [
+                        "674e3ec35cb32f23fb38f500"
+                    ]
+                },
+                "669e6009215ba38bbf687c1a": {
+                    "color": "#9c27b0",
+                    "name": "669e6009215ba38bbf687c1a",
+                    "label": "COPAGAZ",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "669e60125312469a1ac328dd": {
+                    "color": "#00bcd4",
+                    "name": "669e60125312469a1ac328dd",
+                    "label": "LIQUIGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "669e67db9cf2f66a12abcf4e": {
+                    "color": "#773131",
+                    "name": "669e67db9cf2f66a12abcf4e",
+                    "label": "ONOGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "669e6ace6b954947e0ca8349": {
+                    "color": "#b2a542",
+                    "name": "669e6ace6b954947e0ca8349",
+                    "label": "SUPERGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "669e6cacae4aa04f041a7bd7": {
+                    "color": "#24e57c",
+                    "name": "669e6cacae4aa04f041a7bd7",
+                    "label": "TROPIGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "669e6e3132bcddbec6c87085": {
+                    "color": "#498784",
+                    "name": "669e6e3132bcddbec6c87085",
+                    "label": "NOVOGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "669e6ecbf6f5c064e628a628": {
+                    "color": "#bbdc77",
+                    "name": "669e6ecbf6f5c064e628a628",
+                    "label": "HOLIGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "66a0090abdb8ac00a76ab69b": {
+                    "color": "#e03076",
+                    "name": "66a0090abdb8ac00a76ab69b",
+                    "label": "MINASGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "66a00b7c88d650bb0124549d": {
+                    "color": "#1baa36",
+                    "name": "66a00b7c88d650bb0124549d",
+                    "label": "HELIOGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "66a010bdd369de02b2bf9773": {
+                    "color": "#a7b03d",
+                    "name": "66a010bdd369de02b2bf9773",
+                    "label": "PLENOGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "66b233287a4427be81218361": {
+                    "color": "#5dd99f",
+                    "name": "66b233287a4427be81218361",
+                    "label": "AGIPLIQUIGAS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                },
+                "66bbbc63022f5f23e283d61f": {
+                    "color": "#b697e0",
+                    "name": "66bbbc63022f5f23e283d61f",
+                    "label": "OUTROS",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                }
+            },
+            "input": {},
+            "x": -615,
+            "y": -610,
+            "color": "#917DD6",
+            "options": {
+                "label": "CUTTER",
+                "color": "#917DD6",
+                "dataset_id": "66d9c4c5cadd295326d44783",
+                "output_type": "class",
+                "component": "roi_cutter",
+                "component_id": "5d96674dc00beadd67156657",
+                "phase": "process",
+                "process_type": "processor",
+                "draw_output": true,
+                "draw_format": "box",
+                "text_format": "{label}",
+                "confidence_threshold": 0.5,
+                "max_boxes": 4,
+                "expand_boxes": 0,
+                "video_log": true,
+                "video_log_size": 1,
+                "video_log_img_max_size": 1920,
+                "line_width": 1
+            }
+        },
+        {
+            "_id": "672f668678755ad9944529da",
+            "component_name": "consolidate_copa",
+            "component_id": "672f638f59f7298cdd0c390a",
+            "name": "Consolidate Copa",
+            "description": "#  Consolidate Copa\n\nThis component is responsible for receiving data from the edge device. It can be a camera, a microphone, a sensor, or any other device that can provide data to the edge device.\n\n## Properties\n\n- **Label**: The label of the input endpoint.\n- **Color**: The color of the input endpoint.\n- **Name**: The name of the input endpoint.\n- **Input Width**: The width of the input.\n- **Input Height**: The height of the input.\n- **Frame Rate**: The frame rate of the input.\n- **Rotate Image**: Rotate image on camera.\n- **Monitor Output**: Monitor output.\n- **Video Save Output**: Save video output.",
+            "notes": "",
+            "outputs": {},
+            "input": {},
+            "x": -195,
+            "y": -570,
+            "color": "#F6BB42",
+            "options": {
+                "component": "672f638f59f7298cdd0c390a",
+                "phase": "output",
+                "process_type": "consumer",
+                "label": "Consolidate Copa",
+                "color": "#F6BB42",
+                "name": "Station Fortaleza",
+                "version": "1.0.1",
+                "timeout": 2000,
+                "station_id": "641b3a9af742dd9ea6d0416c",
+                "hmi_ws": "http://192.168.2.119:6030",
+                "monitor_output": false,
+                "video_save_output": false
+            }
+        },
+        {
+            "_id": "674e3d4657d99843339f626e",
+            "component_name": "roi_detection",
+            "component_id": "638e3bfee0dd9900c5d982ab",
+            "name": "TARA",
+            "description": "Region Of Interest with Detection\nThis component get a frame, locate objects, and ouputs the region where the object is located. It has one output for each object class.Outputs: JSON with class and position {(x_min, y_min), (x_max, y_max)} of every object detected.",
+            "notes": "",
+            "outputs": {
+                "0": {
+                    "name": "generic",
+                    "color": "black",
+                    "label": "Connection",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                }
+            },
+            "input": {},
+            "x": -395,
+            "y": -755,
+            "color": "#917DD6",
+            "options": {
+                "label": "TARA",
+                "color": "#917DD6",
+                "dataset_id": "65739542e935a8001b1648c7",
+                "output_type": "single",
+                "component": "roi_detection",
+                "component_id": "5d96674dc00beadd67156657",
+                "phase": "process",
+                "process_type": "annotator",
+                "draw_output": true,
+                "draw_format": "box",
+                "text_format": "{label}",
+                "confidence_threshold": 0.5,
+                "max_boxes": 30,
+                "expand_boxes": 0,
+                "video_log": true,
+                "video_log_size": 1,
+                "video_log_img_max_size": 1920,
+                "monitor_output": false,
+                "video_save_output": false,
+                "line_width": 1
+            }
+        },
+        {
+            "_id": "674e3ec35cb32f23fb38f500",
+            "component_name": "roi_detection",
+            "component_id": "638e3bfee0dd9900c5d982ab",
+            "name": "OCR VENCIMENTO",
+            "description": "Region Of Interest with Detection\nThis component get a frame, locate objects, and ouputs the region where the object is located. It has one output for each object class.Outputs: JSON with class and position {(x_min, y_min), (x_max, y_max)} of every object detected.",
+            "notes": "",
+            "outputs": {
+                "0": {
+                    "name": "generic",
+                    "color": "black",
+                    "label": "Connection",
+                    "nodes": [
+                        "672f668678755ad9944529da"
+                    ]
+                }
+            },
+            "input": {},
+            "x": -410,
+            "y": -675,
+            "color": "#917DD6",
+            "options": {
+                "label": "OCR VENCIMENTO",
+                "color": "#917DD6",
+                "dataset_id": "628b9a9b524aea001a727b83",
+                "output_type": "single",
+                "component": "roi_detection",
+                "component_id": "5d96674dc00beadd67156657",
+                "phase": "process",
+                "process_type": "annotator",
+                "draw_output": true,
+                "draw_format": "box",
+                "text_format": "{label}",
+                "confidence_threshold": 0.5,
+                "max_boxes": 30,
+                "expand_boxes": 0,
+                "video_log": true,
+                "video_log_size": 1,
+                "video_log_img_max_size": 1920,
+                "monitor_output": false,
+                "video_save_output": false,
+                "line_width": 1
+            }
+        },
+        {
+            "_id": "678d5279b19d18bed72e3a4b",
+            "component_name": "api_input_endpoint",
+            "component_id": "6786b55bb096f365d0fa2519",
+            "name": "input_endpoint",
+            "description": "# Input Endpoint\n\nThis component is responsible for receiving data from the edge device. It can be a camera, a microphone, a sensor, or any other device that can provide data to the edge device.\n\n## Properties\n\n- **Label**: The label of the input endpoint.\n- **Color**: The color of the input endpoint.\n- **Name**: The name of the input endpoint.\n- **Input Width**: The width of the input.\n- **Input Height**: The height of the input.\n- **Frame Rate**: The frame rate of the input.\n- **Rotate Image**: Rotate image on camera.\n- **Monitor Output**: Monitor output.\n- **Video Save Output**: Save video output.",
+            "notes": "",
+            "outputs": {
+                "0": {
+                    "name": "0",
+                    "color": "black",
+                    "label": "Connection",
+                    "nodes": [
+                        "671954a3fe70f9afbd170fa2"
+                    ]
+                }
+            },
+            "input": {},
+            "x": -710,
+            "y": -715,
+            "color": "#F6BB42",
+            "options": {
+                "component": "6786b55bb096f365d0fa2519",
+                "phase": "input",
+                "process_type": "streamer",
+                "label": "input_endpoint",
+                "color": "#F6BB42",
+                "name": "input_endpoint",
+                "input_width": 1848,
+                "input_height": 1149,
+                "frame_rate": 5,
+                "rotate_image": 0,
+                "listen_port": 8001,
+                "duplicate_image": 0,
+                "version": "1.0.1",
+                "monitor_output": false,
+                "video_save_output": false
+            }
+        }
+    ]
+}

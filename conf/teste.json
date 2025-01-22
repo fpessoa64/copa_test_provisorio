@@ -1,0 +1,117 @@
+{
+    "bbox": {
+        "x_max": 433,
+        "x_min": 191,
+        "y_max": 998,
+        "y_min": 900
+    },
+    "bbox_normalized": {
+        "x_max": 0.23458962440490722,
+        "x_min": 0.10340074300765992,
+        "y_max": 0.8689013618090757,
+        "y_min": 0.7837881949800736
+    },
+    "class": "627e64ba9e724e907b67e2e6",
+    "color": "#ffeb3b",
+    "component_632bbaf920cd2dc5019b1923": {
+        "component_id": "5d96674dc00beadd67156657",
+        "component_name": "roi_cutter",
+        "dataset_id": "65739542e935a8001b1648c7",
+        "draw_format": "box",
+        "draw_output": true,
+        "line_width": 1,
+        "name": "roi_cutter",
+        "outputs": {
+            "0": [
+                {
+                    "bbox": {
+                        "x_max": 374,
+                        "x_min": 344,
+                        "y_max": 980,
+                        "y_min": 937
+                    },
+                    "bbox_normalized": {
+                        "x_max": 0.756213559044732,
+                        "x_min": 0.6358868281046549,
+                        "y_max": 0.8203557910832688,
+                        "y_min": 0.3778576953611136
+                    },
+                    "class": "0",
+                    "color": "#3f51b5",
+                    "confidence": 1.114,
+                    "label": "0"
+                }
+            ],
+            "1": [
+                {
+                    "bbox": {
+                        "x_max": 266,
+                        "x_min": 243,
+                        "y_max": 975,
+                        "y_min": 930
+                    },
+                    "bbox_normalized": {
+                        "x_max": 0.3100232283274333,
+                        "x_min": 0.21808850765228271,
+                        "y_max": 0.7666757836633799,
+                        "y_min": 0.3122090968955942
+                    },
+                    "class": "1",
+                    "color": "#03a9f4",
+                    "confidence": 1.354,
+                    "label": "1"
+                }
+            ],
+            "2": [],
+            "3": [],
+            "4": [
+                {
+                    "bbox": {
+                        "x_max": 297,
+                        "x_min": 268,
+                        "y_max": 977,
+                        "y_min": 934
+                    },
+                    "bbox_normalized": {
+                        "x_max": 0.43897853957282174,
+                        "x_min": 0.32059462865193683,
+                        "y_max": 0.7951975458062965,
+                        "y_min": 0.3558240334192912
+                    },
+                    "class": "4",
+                    "color": "#ffeb3b",
+                    "confidence": 1.384,
+                    "label": "4"
+                }
+            ],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [
+                {
+                    "bbox": {
+                        "x_max": 342,
+                        "x_min": 313,
+                        "y_max": 981,
+                        "y_min": 936
+                    },
+                    "bbox_normalized": {
+                        "x_max": 0.6252527766757541,
+                        "x_min": 0.5044816864861382,
+                        "y_max": 0.8301389498505192,
+                        "y_min": 0.3724968511771723
+                    },
+                    "class": "9",
+                    "color": "#9c27b0",
+                    "confidence": 1.341,
+                    "label": "9"
+                }
+            ]
+        },
+        "text_format": "{label}",
+        "type": "cutter"
+    },
+    "confidence": 1.03,
+    "label": "TARA"
+}

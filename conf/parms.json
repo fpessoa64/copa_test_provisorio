@@ -1,0 +1,39 @@
+
+{
+    "_id": "6786b76adcd490dd776bae8d",
+    "color": "#F6BB42",
+    "component_id": "6786b55bb096f365d0fa2519",
+    "component_name": "api_input_endpoint",
+    "description": "# Input Endpoint\\n\\nThis component is responsible for receiving data from the edge device. It can be a camera, a microphone, a sensor, or any other device that can provide data to the edge device.\\n\\n## Properties\\n\\n- **Label**: The label of the input endpoint.\\n- **Color**: The color of the input endpoint.\\n- **Name**: The name of the input endpoint.\\n- **Input Width**: The width of the input.\\n- **Input Height**: The height of the input.\\n- **Frame Rate**: The frame rate of the input.\\n- **Rotate Image**: Rotate image on camera.\\n- **Monitor Output**: Monitor output.\\n- **Video Save Output**: Save video output.",
+    "input": {},
+    "name": "Api Endpoint",
+    "notes": "",
+    "options": {
+      "color": "#F6BB42",
+      "component": "6786b55bb096f365d0fa2519",
+      "duplicate_image": 1,
+      "frame_rate": 1,
+      "input_height": 1149,
+      "input_width": 1848,
+      "label": "Api Endpoint",
+      "listen_port": 8005,
+      "monitor_output": false,
+      "name": "api_endpoint",
+      "phase": "input",
+      "process_type": "streamer",
+      "rotate_image": 0,
+      "version": "1.0.1",
+      "video_save_output": false,
+      "input_endpoint_url": "http://192.168.2.44:8001"
+    },
+    "outputs": {
+      "0": {
+        "color": "black",
+        "label": "Connection",
+        "name": "0",
+        "nodes": ["6786f4560f7f7e73b0ff7625"]
+      }
+    },
+    "x": 135,
+    "y": 95
+  }

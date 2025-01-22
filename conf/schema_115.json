@@ -1,0 +1,121 @@
+{
+    "device_id":"copa_vision_api",
+    "camera_name":"Copa Vision API",
+    "flow_id":"632b68c276fafd001b164115",
+    "modified_date":"2024-12-17T13:28:45.487Z",
+    "frame":"2025/01/21 09:32:05",
+    "component_632b68ef3ae7b7cd39782b13":{
+      "component_id":"5d96674dc00beadd67156657",
+      "component_name":"roi_cutter",
+      "name":"roi_cutter",
+      "type":"cutter",
+      "dataset_id":"627e64c6edf5da001a60db2c",
+      "draw_output":true,
+      "draw_format":"box",
+      "line_width":1,
+      "text_format":"{label}",
+      "outputs":{
+        "627e64ba9e724e907b67e2e6":[
+          {
+            "class":"627e64ba9e724e907b67e2e6",
+            "label":"TARA",
+            "bbox_normalized":{
+              "x_min":0.10340074300765992,
+              "y_min":0.7837881949800736,
+              "x_max":0.23458962440490722,
+              "y_max":0.8689013618090757
+            },
+            "bbox":{
+              "x_min":191,
+              "y_min":900,
+              "x_max":433,
+              "y_max":998
+            },
+            "color":"#ffeb3b",
+            "confidence":1.03,
+            "component_632bbaf920cd2dc5019b1923":{
+              "component_id":"5d96674dc00beadd67156657",
+              "component_name":"roi_cutter",
+              "name":"roi_cutter",
+              "type":"cutter",
+              "dataset_id":"65739542e935a8001b1648c7",
+              "draw_output":true,
+              "draw_format":"box",
+              "line_width":1,
+              "text_format":"{label}",
+              "outputs": {}
+            }
+          }
+        ],
+        "627e66221e4f106a87cd858e":[
+          {
+            "class":"627e66221e4f106a87cd858e",
+            "label":"FERRADURA",
+            "bbox_normalized":{
+              "x_min":0.48261871337890627,
+              "y_min":0.3991043285041192,
+              "x_max":0.6295484066009521,
+              "y_max":0.6398898455866323
+            },
+            "bbox":{
+              "x_min":891,
+              "y_min":458,
+              "x_max":1163,
+              "y_max":735
+            },
+            "color":"#ff5722",
+            "confidence":1.231,
+            "component_632b6916044e9ebb72172e36":{
+              "component_id":"5d96674dc00beadd67156657",
+              "component_name":"roi_cutter",
+              "name":"roi_cutter",
+              "type":"cutter",
+              "dataset_id":"628b9a9b524aea001a727b83",
+              "draw_output":true,
+              "draw_format":"box",
+              "line_width":1,
+              "text_format":"{label}",
+              "outputs":{
+              }
+            }
+          }
+        ],
+        "669e6009215ba38bbf687c1a":[
+          
+        ],
+        "669e60125312469a1ac328dd":[
+         
+        ],
+        "669e67db9cf2f66a12abcf4e":[
+          
+        ],
+        "669e6ace6b954947e0ca8349":[
+          
+        ],
+        "669e6cacae4aa04f041a7bd7":[
+          
+        ],
+        "669e6e3132bcddbec6c87085":[
+          
+        ],
+        "669e6ecbf6f5c064e628a628":[
+          
+        ],
+        "66a0090abdb8ac00a76ab69b":[
+          
+        ],
+        "66a00b7c88d650bb0124549d":[
+          
+        ],
+        "66a010bdd369de02b2bf9773":[
+          
+        ],
+        "66b233287a4427be81218361":[
+          
+        ],
+        "66bbbc63022f5f23e283d61f":[
+          
+        ]
+      }
+    }
+  }
