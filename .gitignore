@@ -73,3 +73,4 @@ container/lib
 build/*
 *.log
 *.json
+/events

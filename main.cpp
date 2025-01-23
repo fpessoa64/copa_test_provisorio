@@ -53,7 +53,8 @@ int main(int argc, char* argv[])
 
     LOG(INFO) <<  "InspectionManager name: " << inspectionManager.get_name();
 
-    sleep(20);
+    sleep(2);
+    
     copa::ImageServer server("0.0.0.0", 8002);
     server.setupRoutes();
     server.start();

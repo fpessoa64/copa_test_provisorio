@@ -16,6 +16,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends libopencv-dev python3-opencv \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+### install python and pip packages
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends python3-pip \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 # [Optional] Uncomment this section to install additional vcpkg ports.
 # RUN su vscode -c "${VCPKG_ROOT}/vcpkg install <your-port-name-here>"

@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <thread>
 #include "httplib.h"
+#include "consolidate.results.h"
 
 namespace copa
 {
@@ -216,6 +217,18 @@ namespace copa
                     // Tempo expirado, realiza a consolidação
                     json result = consolidate();
                     std::cout << "Consolidation completed: " << result.dump() << std::endl;
+                    // load flow json from conf folder
+                    std::ifstream file("/workspaces/c++/conf/671953f155784c001a41d0dc.json");
+                    if (!file.is_open())
+                    {
+                        throw std::runtime_error("Could not open flow.json");
+                    }
+                    json flow_data = json::parse(file);
+                    file.close();
+
+                    ConsolidateResult *consolidate_result = new ConsolidateResult(flow_data);
+                    consolidate_result->prepare_parms();
+
                 }
             }
         });

@@ -19,7 +19,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(json)
 
 # Add an executable
-add_executable(hello_app main.cpp image.server.cpp manager.inspection.cpp inspection.cpp)
+add_executable(hello_app main.cpp image.server.cpp manager.inspection.cpp inspection.cpp consolidate.results.cpp)
 ### add Google log library 
 # Add the Google logging library (glog)
 FetchContent_Declare(
