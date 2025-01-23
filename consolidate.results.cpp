@@ -5,7 +5,7 @@ namespace copa {
     void ConsolidateResult::prepare_parms()
     {
         LOG(INFO) << "prepare_parms called << " << m_flow_data.dump();
-        json node_components = get_node_components_data(m_flow_data, m_main_cutter_name, m_cylinder_tare_ocr_name, m_cylinder_expiration_date_ocr_name, m_tare_class_label, m_expiration_date_class_label, m_color_class_label);
+        m_node_components = get_node_components_data(m_flow_data, m_main_cutter_name, m_cylinder_tare_ocr_name, m_cylinder_expiration_date_ocr_name, m_tare_class_label, m_expiration_date_class_label, m_color_class_label);
 
     }
     //--------------------------------------------------------------------------------
@@ -75,9 +75,9 @@ namespace copa {
     }
     //--------------------------------------------------------------------------------
 
-    json ConsolidateResult::run(json result)
+    json ConsolidateResult::run(json &results)
     {
-        LOG(INFO) << "run called << " << result.dump();
+        LOG(INFO) << "run called << " << results.dump();
 
         json classifier_detections = {
             {"color", json::object()},
@@ -93,7 +93,45 @@ namespace copa {
         };
         bool tare_plate_dectected = false;
 
-        return result;
+        for(auto &[key, result] : results.items())
+        {
+            LOG(INFO) << "processing result: key: " << key << " val: " << result.dump();
+            /// for component_key in [key for key in result.keys() if key.startswith("component_")]:
+            ///    log.info(f"Processing component_key: {component_key}")
+            for(auto &[k, v] : result.items())
+            {
+                if(k.find("component_") != std::string::npos)
+                {
+                    LOG(INFO) << "Processing component_key: " << k << " main_cutter: " << m_node_components["main_cutter"];
+                    if(k != m_node_components["main_cutter"])
+                    {
+                        if(k == m_node_components["color_class_component"])
+                        {
+                            classifier_detections["color"] = v["outputs"];
+                            classifier_detections["exists"] = true;
+                        }
+                        continue;
+                    }
+                    json component = v;
+                    LOG(INFO) << "component: " << component.dump();
+                    // valid_class_id_list = [class_id for class_id in component["outputs"].keys() if class_id in [self.node_components["tare_class_id"], self.node_components["expiration_date_class_id"]]]
+                    // log.info(f'valid_class_list: {valid_class_id_list}')
+                 
+                    json valid_class_id_list = json::array();
+                    for(auto &[key, val] : component["outputs"].items())
+                    {
+                        if(key == m_node_components["tare_class_id"] || key == m_node_components["expiration_date_class_id"])
+                        {
+                            valid_class_id_list.push_back(key);
+                        }
+                    }
+                    LOG(INFO) << "valid_class_list: " << valid_class_id_list.dump();
+
+                }
+            }
+        }
+
+        return json::object();
     }
     //--------------------------------------------------------------------------------
 }

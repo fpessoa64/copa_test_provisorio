@@ -229,10 +229,14 @@ namespace copa
                     ConsolidateResult *consolidate_result = new ConsolidateResult(flow_data);
                     consolidate_result->prepare_parms();
                     consolidate_result->run(result);
+                    delete consolidate_result;
+                    break;
+                    
 
                 }
             }
         });
+        //stop_consolidation_thread();
     }
     //--------------------------------------------------------------------------------
 

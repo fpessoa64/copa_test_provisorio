@@ -23,10 +23,11 @@ namespace copa
         }
 
         void prepare_parms();
-        json run(json result);
+        json run(json &resuls);
 
     private:
         json m_flow_data;
+        json m_node_components;
         std::string m_main_cutter_name;
         std::string m_cylinder_tare_ocr_name;
         std::string m_cylinder_expiration_date_ocr_name;

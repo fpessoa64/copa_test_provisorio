@@ -333,7 +333,7 @@ class MainCutterDetection:
 class ConsolidateResults:
 
 
-    def __init__(self, flow_data, main_cutter_name="CUTTER", cylinder_tare_ocr_name="TARA", cylinder_expiration_date_ocr_name="OCR VENCIMENTO", tare_class_label="TARA", expiration_date_class_label="FERRADURA",color_class_label="COR BOTIJAO"):
+    def __init__(self, flow_data, main_cutter_name="CUTTER", cylinder_tare_ocr_name="OCR TARA", cylinder_expiration_date_ocr_name="OCR VENCIMENTO", tare_class_label="TARA", expiration_date_class_label="FERRADURA",color_class_label="COR BOTIJAO"):
 
         self.flow_data = flow_data
         self.main_cutter_name = main_cutter_name
@@ -378,9 +378,9 @@ class ConsolidateResults:
 
         for index in results:
             result = results[index]
-            log.info(f"Processing result: {result}")
+            #log.info(f"Processing result: {result}")  
             for component_key in [key for key in result.keys() if key.startswith("component_")]:
-                log.info(f"Processing component_key: {component_key}")
+                #log.info(f"Processing component_key: {component_key} main_cutter:  {self.node_components['main_cutter']}")
                 if component_key != self.node_components["main_cutter"]:
                     if component_key == self.node_components["color_class_component"]:
                         classifier_detections["color"] = result[component_key]["outputs"]
@@ -389,8 +389,11 @@ class ConsolidateResults:
 
                 component = result[component_key]
                 log.info(f'component: {component}')
+          
+            
                 valid_class_id_list = [class_id for class_id in component["outputs"].keys() if class_id in [self.node_components["tare_class_id"], self.node_components["expiration_date_class_id"]]]
                 log.info(f'valid_class_list: {valid_class_id_list}')
+                continue
                 brands = []
                 for key in self.node_components.keys():
                     log.info(f'valid_class_list: {key} value: {self.node_components[key]}')
@@ -516,14 +519,14 @@ class ConsolidateResults:
 
 
 if __name__ == "__main__":
-    flow_id = "671953f155784c001a41d0dc"
-    #flow_id = "632b68c276fafd001b164115"
+    #flow_id = "671953f155784c001a41d0dc"
+    flow_id = "632b68c276fafd001b164115"
     flow_file = os.path.join("/workspaces/c++/conf", flow_id + ".json")
     log.info(f'flow_file: {flow_file}')
     with open(flow_file, 'r', newline='', encoding='utf8') as fp:
         flow_data = json.load(fp)
 
-    file_result = os.path.join("/workspaces/c++/conf", "result.json")
+    file_result = os.path.join("/workspaces/c++/conf", "result_632b68c276fafd001b164115.json")
 
     with open(file_result, 'r', newline='', encoding='utf8') as fp:
         results = json.load(fp)
