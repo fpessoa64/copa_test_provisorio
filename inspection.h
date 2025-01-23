@@ -266,14 +266,20 @@ namespace copa
         std::mutex lock_;
         std::map<std::string, Image *> data_images;
         json m_parms;
-
+        std::condition_variable m_condition;
+        std::thread m_consolidation_thread;
+        bool m_stop_thread = false;
+        std::mutex m_lock_consolidate;
         std::string generate_id();
         void send_images();
+        json prepare();
         // void extract_classes(const json &node, std::unordered_set<std::string> &classes);
         // void update_tara(json &json_schema, const json &value);
         // void update_ferradura(json &json_schema, const json &value);
         // void update_brand(json &json_schema, const json &value);
         void update_schema(json &jsonData, const std::string &key, const json &newValue);
         void update_brand(std::string name, json &jsonData, const std::string &key, const json &newValue);
+        void start_consolidation_thread(int consolidation_interval) ;
+        void stop_consolidation_thread();
     };
 }

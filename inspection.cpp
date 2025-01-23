@@ -20,18 +20,19 @@ namespace copa
     void Inspection::add_event(const std::string &key, json &value)
     {
         try {
-            std::cerr << "Erro ao add a event" << key << ": " << value.dump() << std::endl;
+            std::lock_guard<std::mutex> lock(m_lock_consolidate);
+
             data_images[key]->fixAnnotations(value);
             data_images[key]->add_event(value);
         }
         catch (const std::exception &e)
         {
             std::cerr << "Erro ao add a event" << key << ": " << e.what() << std::endl;
-            exit(1);
         }
+         m_condition.notify_all();
     }
+    //--------------------------------------------------------------------------------
 
-   
     void Inspection::update_schema(json &jsonData, const std::string &key, const json &newValue)
     {
         if (jsonData.is_object())
@@ -80,11 +81,14 @@ namespace copa
         }
     }
     //--------------------------------------------------------------------------------
-
-    json Inspection::consolidate()
+    json Inspection::consolidate() 
     {
-        /// load file json of folder conf parms.json
-      
+        return prepare();
+    }
+    //--------------------------------------------------------------------------------
+
+    json Inspection::prepare()
+    {
         json consolidate;
         json consolidated_data;
         int index = 0;
@@ -115,16 +119,16 @@ namespace copa
                 for (auto &[k2,v2]: v1["output_data"].items()) {
                     //std::cout << "LOG - "<< " k2: " << k2 <<  " v2: " << v2.dump() << std::endl;
                     std::string name = v2.value("name","");
-                    if(name == "TARA") {
+                    if(name == "TARA" || name == "OCR VENCIMENTO") {
                         //std::cout << "LOG - k2: " << k2  << " update tara: " << v2.dump() << std::endl;
                         std::string key = "component_" + v2.value("component_id","");
                         update_schema(schema_json, key, v2);
                     }
-                    else if(name == "OCR VENCIMENTO") {
-                        //std::cout << "LOG - k2: " << k2  << " update ferradura: " << v2.dump() << std::endl;
-                        std::string key = "component_" + v2.value("component_id","");
-                        update_schema(schema_json, key, v2);
-                    }
+                    // else if(name == "OCR VENCIMENTO") {
+                    //     //std::cout << "LOG - k2: " << k2  << " update ferradura: " << v2.dump() << std::endl;
+                    //     std::string key = "component_" + v2.value("component_id","");
+                    //     update_schema(schema_json, key, v2);
+                    // }
                     else if(name == "CUTTER") {
                         //std::cout << "LOG - k2: " << k2  << " update cutter: " << v2.dump() << std::endl;
                         
@@ -165,7 +169,8 @@ namespace copa
         std::thread t1(&Inspection::send_images, this);
         t1.join();
     }
-
+    //--------------------------------------------------------------------------------
+    
     void Inspection::force_inspection(std::string image_id, std::string image_abs_id, std::string image_border_id)
     {
         std::cout << "m_parms: " << m_parms.dump() << std::endl;
@@ -174,8 +179,11 @@ namespace copa
         data_images[image_abs_id] = new ImageScaleAbs(cv::Mat());
         data_images[image_border_id] = new ImageOriginal(cv::Mat());
 
+        start_consolidation_thread(10);
+
         std::cout << "force_inspection: " << image_id << " image_abs_id: " << image_abs_id << " image_border_id: " << image_border_id << std::endl;
     }
+    //--------------------------------------------------------------------------------
 
     /**
      * @brief Send images to external API
@@ -195,7 +203,36 @@ namespace copa
             sender.sendImage(image.second->getImage(), image.first);
         }
     }
+    //--------------------------------------------------------------------------------
 
+    void Inspection::start_consolidation_thread(int consolidation_interval) {
+        m_stop_thread = false;
+
+        m_consolidation_thread = std::thread([this, consolidation_interval]() {
+            std::unique_lock<std::mutex> lock(m_lock_consolidate);
+            while (!m_stop_thread) {
+                // Aguarda até o tempo especificado ou até que add_event notifique
+                if (m_condition.wait_for(lock, std::chrono::seconds(consolidation_interval)) == std::cv_status::timeout) {
+                    // Tempo expirado, realiza a consolidação
+                    json result = consolidate();
+                    std::cout << "Consolidation completed: " << result.dump() << std::endl;
+                }
+            }
+        });
+    }
+    //--------------------------------------------------------------------------------
+
+    void Inspection::stop_consolidation_thread() {
+        {
+            std::lock_guard<std::mutex> lock(m_lock_consolidate);
+            m_stop_thread = true;
+        }
+        m_condition.notify_all();
+        if (m_consolidation_thread.joinable()) {
+            m_consolidation_thread.join();
+        }
+    }
+    //--------------------------------------------------------------------------------
     /**
      * @brief Generate a random UUID
      */

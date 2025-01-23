@@ -71,3 +71,5 @@ container/lib
 
 !libptypes.a
 build/*
+*.log
+*.json

@@ -21,23 +21,39 @@ void add_event(std::string path,std::string inspection_id,std::string image_id,c
 int main(int argc, char* argv[])
 {
     // Create log directory if it doesn't exist
-   
-    google::InitGoogleLogging(argv[0]);
-    FLAGS_log_dir = "/workspaces/c++/build/log";
-    FLAGS_logtostderr = false;
- 
-    using json = nlohmann::json;
-    std::cout << "Hello, World!" << std::endl;
+    std::cout << "Create log directory if it doesn't exist file: " << argv[0] <<  std::endl;
+  // Diretório para armazenar logs
+    const std::string log_dir = "/workspaces/c++/log";
+
+    // Verifica se o diretório existe, caso contrário, cria
+    if (!std::filesystem::exists(log_dir)) {
+        std::cout << "Log directory does not exist. Creating: " << log_dir << std::endl;
+        std::filesystem::create_directories(log_dir);
+    }
+
+    // Inicializa o Google Logging
+    google::InitGoogleLogging("hello_app");
+    FLAGS_log_dir = "/workspaces/c++/log";
+
+    // Habilita log no console além do arquivo
+    FLAGS_logtostderr = false;      // Logs não são exibidos apenas no console
+    FLAGS_alsologtostderr = true;   // Logs aparecem no console **e** no arquivo
+    FLAGS_minloglevel = 0;   
+
+  
+    LOG(INFO) << "Hello, World 2!";
 
     ///load json from  folder conf file parms.json
     std::ifstream i("/workspaces/c++/conf/parms.json");
     json parms = json::parse(i);
-    std::cout << parms.dump(4) << std::endl;
+    LOG(INFO) << parms.dump();
 
     copa::InspectionManager &inspectionManager = copa::InspectionManager::get_instance();
     inspectionManager.set_parms(parms);
-    std::cout <<  "InspectionManager name: " << inspectionManager.get_name() << std::endl;
-    sleep(2);
+
+    LOG(INFO) <<  "InspectionManager name: " << inspectionManager.get_name();
+
+    sleep(20);
     copa::ImageServer server("0.0.0.0", 8002);
     server.setupRoutes();
     server.start();
@@ -61,10 +77,13 @@ int main(int argc, char* argv[])
     path = "/workspaces/c++/events/image_border";
     add_event(path,inspection_id,frame_id_border,inspectionManager);
 
-    inspectionManager.consolidate_inspection(inspection_id);
+    //inspectionManager.consolidate_inspection(inspection_id);
 
     std::cout << "Server is running in a separate thread. Press Enter to exit..." << std::endl;
     std::cin.get();
+
+    google::ShutdownGoogleLogging();
+
     return 0;
 
 }
