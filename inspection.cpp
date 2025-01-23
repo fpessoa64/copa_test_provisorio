@@ -180,7 +180,7 @@ namespace copa
         data_images[image_abs_id] = new ImageScaleAbs(cv::Mat());
         data_images[image_border_id] = new ImageOriginal(cv::Mat());
 
-        start_consolidation_thread(10);
+        start_consolidation_thread(3);
 
         std::cout << "force_inspection: " << image_id << " image_abs_id: " << image_abs_id << " image_border_id: " << image_border_id << std::endl;
     }
@@ -228,6 +228,7 @@ namespace copa
 
                     ConsolidateResult *consolidate_result = new ConsolidateResult(flow_data);
                     consolidate_result->prepare_parms();
+                    consolidate_result->run(result);
 
                 }
             }

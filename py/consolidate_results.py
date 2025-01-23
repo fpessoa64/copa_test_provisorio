@@ -35,7 +35,7 @@ def get_node_components_data(
 
     node_components = {}
     for comp in flow_data["nodes"]:
-        log.info(f'comp: {comp}')
+        # log.info(f'comp: {comp}')
         if comp.get("name") == cylinder_tare_ocr_name:
             node_components["ocr_tare_component"] = "component_" + comp["_id"]
         if comp.get("name") == color_class_label:
@@ -356,6 +356,9 @@ class ConsolidateResults:
   
     def __call__(self, results):
 
+        log.info(f'results: {results}')
+      
+    
         classifier_detections = {
             "color": {},
             "exists": False
@@ -520,7 +523,13 @@ if __name__ == "__main__":
     with open(flow_file, 'r', newline='', encoding='utf8') as fp:
         flow_data = json.load(fp)
 
+    file_result = os.path.join("/workspaces/c++/conf", "result.json")
+
+    with open(file_result, 'r', newline='', encoding='utf8') as fp:
+        results = json.load(fp)
+    
     consolidate_results = ConsolidateResults(flow_data)
+    final_result = consolidate_results(results)
 
 # if __name__ == "__main__":
 

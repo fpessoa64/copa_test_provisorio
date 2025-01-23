@@ -17,34 +17,9 @@ namespace copa {
             std::string expiration_date_class_label,
             std::string color_class_label) 
     {
-        /**
-         * node_components = {}
-    for comp in flow_data["nodes"]:
-        log.info(f'comp: {comp}')
-        if comp.get("name") == cylinder_tare_ocr_name:
-            node_components["ocr_tare_component"] = "component_" + comp["_id"]
-        if comp.get("name") == color_class_label:
-            node_components["color_class_component"] = "component_" + comp["_id"]
-        elif comp.get("name") == cylinder_expiration_date_ocr_name:
-            node_components["ocr_expiration_date_component"] = "component_" + comp["_id"]
-        elif comp.get("name") == main_cutter_name:
-            node_components["main_cutter"] = "component_" + comp["_id"]
-            for key, val in comp["outputs"].items():
-                log.info(f'key: {key} val: {val}')
-                if val["label"] == tare_class_label:
-                    node_components["tare_class_id"] = key
-                elif val["label"] == expiration_date_class_label:
-                    node_components["expiration_date_class_id"] = key
-                else:
-                    log.info(f'check key: {key} val: {val}')
-                    node_components[val['label']] = key
-                
-         */
-
         json node_components = json::object();
         for (auto &comp : flow_data["nodes"])
         {
-            LOG(INFO) << "comp: " << comp.dump();
             if (comp.value("name","") == cylinder_tare_ocr_name)
             {
                 node_components["ocr_tare_component"] = "component_" + comp.value("_id","");
@@ -62,7 +37,6 @@ namespace copa {
                 node_components["main_cutter"] = "component_" + comp.value("_id","");
                 for (auto &[key, val] : comp["outputs"].items())
                 {
-                    LOG(INFO) << "key: " << key << " val: " << val.dump();
                     if (val["label"] == tare_class_label)
                     {
                         node_components["tare_class_id"] = key;
@@ -73,16 +47,53 @@ namespace copa {
                     }
                     else
                     {
-                        LOG(INFO) << "check key: " << key << " val: " << val.dump();
                         node_components[val.value("label","")] = key;
                     }
                 }
             }
         }
+
+        if(node_components.contains("ocr_tare_component") == false)
+        {
+            throw new std::runtime_error("did not find ocr_tare_component in flow");
+        }
+        if(node_components.contains("ocr_expiration_date_component") == false)
+        {
+            throw new std::runtime_error("did not find ocr_expiration_date_component in flow");
+        }
+        if(node_components.contains("main_cutter") == false)
+        {
+            throw new std::runtime_error("did not find main_cutter in flow");
+        }
+        if(node_components.contains("tare_class_id") == false)
+        {
+            throw new std::runtime_error("did not find tare_class_id in flow");
+        }
+
         LOG(INFO) << "node_components: " << node_components.dump();
         return node_components;
     }
-    
-    
+    //--------------------------------------------------------------------------------
 
+    json ConsolidateResult::run(json result)
+    {
+        LOG(INFO) << "run called << " << result.dump();
+
+        json classifier_detections = {
+            {"color", json::object()},
+            {"exists", false}
+        };
+        json main_cutter_detections = {
+            {"tare", json::array()},
+            {"expiration_date",json::array()}
+        };
+        json brand_detections = {
+            {"exists", false},
+            {"brand", json::object()}
+        };
+        bool tare_plate_dectected = false;
+
+        return result;
+    }
+    //--------------------------------------------------------------------------------
 }

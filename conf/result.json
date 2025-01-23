@@ -1,548 +1,1007 @@
 {
-    "0": [
-        {
-            "component_input": "component_632b68ef3ae7b7cd39782b13",
-            "component_output": "component_632bbaf920cd2dc5019b1923",
-            "env_var": {
-                "edge_id": "67863e1a5106660013816946",
-                "edge_name": "test_dev_copa_40",
-                "flow_id": "671953f155784c001a41d0dc"
-            },
-            "flow_test": false,
-            "frame_clock": 531004023732.429,
-            "frame_height": 124,
-            "frame_id": "9dadac7c-7884-496c-b59f-00006b5c12e132d617f3",
-            "frame_mat_type": 16,
-            "frame_seq": 1,
-            "frame_status": "OK",
-            "frame_time": 1737405910.5413952,
-            "frame_width": 124,
-            "input_frame_size": [
-                1848,
-                1149
-            ],
-            "input_label": "input_endpoint",
-            "input_name": "input_endpoint",
-            "input_window": [
-                [
-                    506,
-                    464
+    "0": {
+        "_id": "671953f155784c001a41d0dc",
+        "component_671954a3fe70f9afbd170fa2": {
+            "component_id": "5d96674dc00beadd67156657",
+            "component_name": "roi_cutter",
+            "dataset_id": "627e64c6edf5da001a60db2c",
+            "draw_format": "box",
+            "draw_output": true,
+            "line_width": 1,
+            "name": "roi_cutter",
+            "outputs": {
+                "627e64ba9e724e907b67e2e6": [
+                    {
+                        "bbox": {
+                            "x_max": 433,
+                            "x_min": 191,
+                            "y_max": 998,
+                            "y_min": 900
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.23458962440490722,
+                            "x_min": 0.10340074300765992,
+                            "y_max": 0.8689013618090757,
+                            "y_min": 0.7837881949800736
+                        },
+                        "class": "627e64ba9e724e907b67e2e6",
+                        "color": "#ffeb3b",
+                        "component_674e3d4657d99843339f626e": {
+                            "component_id": "674e3d4657d99843339f626e",
+                            "component_name": "TARA",
+                            "dataset_id": "65739542e935a8001b1648c7",
+                            "draw_format": "box",
+                            "draw_function": "boxes",
+                            "draw_output": true,
+                            "flow_component_id": "638e3bfee0dd9900c5d982ab",
+                            "flow_component_name": "roi_detection",
+                            "input_window": [
+                                [
+                                    506,
+                                    464
+                                ],
+                                [
+                                    630,
+                                    588
+                                ]
+                            ],
+                            "line_width": 1,
+                            "name": "TARA",
+                            "outputs": {
+                                "0": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 618,
+                                            "x_min": 598,
+                                            "y_max": 528,
+                                            "y_min": 489
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.3344155844155844,
+                                            "x_min": 0.3235930735930736,
+                                            "y_max": 0.4595300261096606,
+                                            "y_min": 0.4255874673629243
+                                        },
+                                        "class": "0",
+                                        "color": "#3f51b5",
+                                        "confidence": 0.859,
+                                        "label": "0"
+                                    }
+                                ],
+                                "1": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 561,
+                                            "x_min": 541,
+                                            "y_max": 560,
+                                            "y_min": 522
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.30357142857142855,
+                                            "x_min": 0.29274891774891776,
+                                            "y_max": 0.48738033072236725,
+                                            "y_min": 0.45430809399477806
+                                        },
+                                        "class": "1",
+                                        "color": "#03a9f4",
+                                        "confidence": 0.9,
+                                        "label": "1"
+                                    }
+                                ],
+                                "2": [],
+                                "3": [],
+                                "4": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 579,
+                                            "x_min": 560,
+                                            "y_max": 550,
+                                            "y_min": 515
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.3133116883116883,
+                                            "x_min": 0.30303030303030304,
+                                            "y_max": 0.47867711053089645,
+                                            "y_min": 0.4482158398607485
+                                        },
+                                        "class": "4",
+                                        "color": "#ffeb3b",
+                                        "confidence": 0.659,
+                                        "label": "4"
+                                    }
+                                ],
+                                "5": [],
+                                "6": [],
+                                "7": [],
+                                "8": [],
+                                "9": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 603,
+                                            "x_min": 583,
+                                            "y_max": 537,
+                                            "y_min": 499
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.3262987012987013,
+                                            "x_min": 0.31547619047619047,
+                                            "y_max": 0.46736292428198434,
+                                            "y_min": 0.43429068755439515
+                                        },
+                                        "class": "9",
+                                        "color": "#9c27b0",
+                                        "confidence": 0.651,
+                                        "label": "9"
+                                    }
+                                ]
+                            },
+                            "text_format": "{label}",
+                            "type": "annotator"
+                        },
+                        "confidence": 1.03,
+                        "label": "TARA"
+                    }
                 ],
-                [
-                    630,
-                    588
-                ]
-            ],
-            "inspection_id": "1737405909",
-            "output_data": {
-                "component_632b68ef3ae7b7cd39782b13": {
-                    "component_id": "632b68ef3ae7b7cd39782b13",
-                    "component_name": "CUTTER",
-                    "dataset_id": "66d9c4c5cadd295326d44783",
-                    "draw_format": "box",
-                    "draw_output": true,
-                    "flow_component_id": "5d96674dc00beadd67156657",
-                    "flow_component_name": "roi_cutter",
-                    "input_window": [
-                        [
-                            0,
-                            0
-                        ],
-                        [
-                            1848,
-                            1149
-                        ]
-                    ],
-                    "line_width": 1,
-                    "name": "CUTTER",
-                    "outputs": [
-                        {
-                            "bbox": {
-                                "x_max": 630,
-                                "x_min": 506,
-                                "y_max": 588,
-                                "y_min": 464
+                "627e66221e4f106a87cd858e": [
+                    {
+                        "bbox": {
+                            "x_max": 1163,
+                            "x_min": 891,
+                            "y_max": 735,
+                            "y_min": 458
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.6295484066009521,
+                            "x_min": 0.48261871337890627,
+                            "y_max": 0.6398898455866323,
+                            "y_min": 0.3991043285041192
+                        },
+                        "class": "627e66221e4f106a87cd858e",
+                        "color": "#ff5722",
+                        "component_674e3ec35cb32f23fb38f500": {
+                            "component_id": "674e3ec35cb32f23fb38f500",
+                            "component_name": "OCR VENCIMENTO",
+                            "dataset_id": "628b9a9b524aea001a727b83",
+                            "draw_format": "box",
+                            "draw_function": "boxes",
+                            "draw_output": true,
+                            "flow_component_id": "638e3bfee0dd9900c5d982ab",
+                            "flow_component_name": "roi_detection",
+                            "input_window": [
+                                [
+                                    892,
+                                    464
+                                ],
+                                [
+                                    1161,
+                                    729
+                                ]
+                            ],
+                            "line_width": 1,
+                            "name": "OCR VENCIMENTO",
+                            "outputs": {
+                                "0": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 1046,
+                                            "x_min": 1017,
+                                            "y_max": 534,
+                                            "y_min": 492
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.566017316017316,
+                                            "x_min": 0.5503246753246753,
+                                            "y_max": 0.46475195822454307,
+                                            "y_min": 0.4281984334203655
+                                        },
+                                        "class": "0",
+                                        "color": "#3f51b5",
+                                        "confidence": 1.125,
+                                        "label": "0"
+                                    }
+                                ],
+                                "1": [],
+                                "2": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 1090,
+                                            "x_min": 1053,
+                                            "y_max": 544,
+                                            "y_min": 501
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5898268398268398,
+                                            "x_min": 0.5698051948051948,
+                                            "y_max": 0.4734551784160139,
+                                            "y_min": 0.4360313315926893
+                                        },
+                                        "class": "2",
+                                        "color": "#009688",
+                                        "confidence": 0.984,
+                                        "label": "2"
+                                    }
+                                ],
+                                "3": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 979,
+                                            "x_min": 938,
+                                            "y_max": 563,
+                                            "y_min": 528
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5297619047619048,
+                                            "x_min": 0.5075757575757576,
+                                            "y_max": 0.4899912967798085,
+                                            "y_min": 0.4595300261096606
+                                        },
+                                        "class": "3",
+                                        "color": "#8bc34a",
+                                        "confidence": 0.94,
+                                        "label": "3"
+                                    },
+                                    {
+                                        "bbox": {
+                                            "x_max": 1006,
+                                            "x_min": 973,
+                                            "y_max": 541,
+                                            "y_min": 502
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5443722943722944,
+                                            "x_min": 0.5265151515151515,
+                                            "y_max": 0.47084421235857266,
+                                            "y_min": 0.43690165361183636
+                                        },
+                                        "class": "3",
+                                        "color": "#8bc34a",
+                                        "confidence": 0.641,
+                                        "label": "3"
+                                    }
+                                ],
+                                "4": [],
+                                "5": [],
+                                "6": [],
+                                "7": [],
+                                "8": [],
+                                "9": []
                             },
-                            "bbox_normalized": {
-                                "x_max": 0.3409090909090909,
-                                "x_min": 0.27380952380952384,
-                                "y_max": 0.5117493472584856,
-                                "y_min": 0.40382941688424717
-                            },
-                            "class": "627e64ba9e724e907b67e2e6",
-                            "color": "#ffeb3b",
-                            "confidence": 0.726,
-                            "label": "TARA"
-                        }
-                    ],
-                    "text_format": "{label}",
-                    "type": "cutter"
-                },
-                "component_632bbaf920cd2dc5019b1923": {
-                    "component_id": "632bbaf920cd2dc5019b1923",
-                    "component_name": "TARA",
-                    "dataset_id": "65739542e935a8001b1648c7",
-                    "draw_format": "box",
-                    "draw_function": "boxes",
-                    "draw_output": true,
-                    "flow_component_id": "638e3bfee0dd9900c5d982ab",
-                    "flow_component_name": "roi_detection",
-                    "input_window": [
-                        [
-                            506,
-                            464
-                        ],
-                        [
-                            630,
-                            588
-                        ]
-                    ],
-                    "line_width": 1,
-                    "name": "TARA",
-                    "outputs": {
-                        "0": [
-                            {
-                                "bbox": {
-                                    "x_max": 618,
-                                    "x_min": 598,
-                                    "y_max": 528,
-                                    "y_min": 489
-                                },
-                                "bbox_normalized": {
-                                    "x_max": 0.3344155844155844,
-                                    "x_min": 0.3235930735930736,
-                                    "y_max": 0.4595300261096606,
-                                    "y_min": 0.4255874673629243
-                                },
-                                "class": "0",
-                                "color": "#3f51b5",
-                                "confidence": 0.851,
-                                "label": "0"
-                            }
-                        ],
-                        "1": [
-                            {
-                                "bbox": {
-                                    "x_max": 561,
-                                    "x_min": 542,
-                                    "y_max": 560,
-                                    "y_min": 522
-                                },
-                                "bbox_normalized": {
-                                    "x_max": 0.30357142857142855,
-                                    "x_min": 0.29329004329004327,
-                                    "y_max": 0.48738033072236725,
-                                    "y_min": 0.45430809399477806
-                                },
-                                "class": "1",
-                                "color": "#03a9f4",
-                                "confidence": 0.884,
-                                "label": "1"
-                            }
-                        ],
-                        "2": [],
-                        "3": [],
-                        "4": [
-                            {
-                                "bbox": {
-                                    "x_max": 579,
-                                    "x_min": 560,
-                                    "y_max": 550,
-                                    "y_min": 515
-                                },
-                                "bbox_normalized": {
-                                    "x_max": 0.3133116883116883,
-                                    "x_min": 0.30303030303030304,
-                                    "y_max": 0.47867711053089645,
-                                    "y_min": 0.4482158398607485
-                                },
-                                "class": "4",
-                                "color": "#ffeb3b",
-                                "confidence": 0.65,
-                                "label": "4"
-                            }
-                        ],
-                        "5": [],
-                        "6": [],
-                        "7": [],
-                        "8": [],
-                        "9": [
-                            {
-                                "bbox": {
-                                    "x_max": 603,
-                                    "x_min": 583,
-                                    "y_max": 537,
-                                    "y_min": 499
-                                },
-                                "bbox_normalized": {
-                                    "x_max": 0.3262987012987013,
-                                    "x_min": 0.31547619047619047,
-                                    "y_max": 0.46736292428198434,
-                                    "y_min": 0.43429068755439515
-                                },
-                                "class": "9",
-                                "color": "#9c27b0",
-                                "confidence": 0.649,
-                                "label": "9"
-                            }
-                        ]
+                            "text_format": "{label}",
+                            "type": "annotator"
+                        },
+                        "confidence": 1.231,
+                        "label": "FERRADURA"
+                    }
+                ],
+                "669e6009215ba38bbf687c1a": [],
+                "669e60125312469a1ac328dd": [
+                    {
+                        "bbox": {
+                            "x_max": 1839,
+                            "x_min": 1623,
+                            "y_max": 238,
+                            "y_min": 104
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.9951298701298701,
+                            "x_min": 0.8782467532467533,
+                            "y_max": 0.2071366405570061,
+                            "y_min": 0.09051348999129678
+                        },
+                        "class": "669e60125312469a1ac328dd",
+                        "color": "#00bcd4",
+                        "confidence": 0.878,
+                        "label": "LIQUIGAS"
                     },
-                    "text_format": "{label}",
-                    "type": "annotator"
-                }
-            }
-        },
-        {
-            "component_input": "component_678d5279b19d18bed72e3a4b",
-            "component_output": "component_632b68ef3ae7b7cd39782b13",
-            "env_var": {
-                "edge_id": "67863e1a5106660013816946",
-                "edge_name": "test_dev_copa_40",
-                "flow_id": "671953f155784c001a41d0dc"
-            },
-            "flow_test": false,
-            "frame_clock": 531004023732.429,
-            "frame_height": 134,
-            "frame_id": "9dadac7c-7884-496c-b59f-00006b5c12e132d617f3",
-            "frame_mat_type": 16,
-            "frame_seq": 1,
-            "frame_status": "OK",
-            "frame_time": 1737405910.5413952,
-            "frame_width": 216,
-            "input_frame_size": [
-                1848,
-                1149
-            ],
-            "input_label": "input_endpoint",
-            "input_name": "input_endpoint",
-            "input_window": [
-                [
-                    1623,
-                    104
+                    {
+                        "bbox": {
+                            "x_max": 994,
+                            "x_min": 665,
+                            "y_max": 299,
+                            "y_min": 152
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.5378787878787878,
+                            "x_min": 0.35984848484848486,
+                            "y_max": 0.26022628372497825,
+                            "y_min": 0.13228894691035684
+                        },
+                        "class": "669e60125312469a1ac328dd",
+                        "color": "#00bcd4",
+                        "confidence": 0.722,
+                        "label": "LIQUIGAS"
+                    }
                 ],
-                [
-                    1839,
-                    238
-                ]
-            ],
-            "inspection_id": "1737405909",
-            "output_data": {
-                "component_632b68ef3ae7b7cd39782b13": {
-                    "component_id": "632b68ef3ae7b7cd39782b13",
-                    "component_name": "CUTTER",
-                    "dataset_id": "66d9c4c5cadd295326d44783",
-                    "draw_format": "box",
-                    "draw_output": true,
-                    "flow_component_id": "5d96674dc00beadd67156657",
-                    "flow_component_name": "roi_cutter",
-                    "input_window": [
-                        [
-                            0,
-                            0
-                        ],
-                        [
-                            1848,
-                            1149
-                        ]
-                    ],
-                    "line_width": 1,
-                    "name": "CUTTER",
-                    "outputs": [
-                        {
-                            "bbox": {
-                                "x_max": 1839,
-                                "x_min": 1623,
-                                "y_max": 238,
-                                "y_min": 104
-                            },
-                            "bbox_normalized": {
-                                "x_max": 0.9951298701298701,
-                                "x_min": 0.8782467532467533,
-                                "y_max": 0.2071366405570061,
-                                "y_min": 0.09051348999129678
-                            },
-                            "class": "669e60125312469a1ac328dd",
-                            "color": "#00bcd4",
-                            "confidence": 0.86,
-                            "label": "LIQUIGAS"
-                        }
-                    ],
-                    "text_format": "{label}",
-                    "type": "cutter"
-                }
-            }
-        },
-        {
-            "component_input": "component_678d5279b19d18bed72e3a4b",
-            "component_output": "component_632b68ef3ae7b7cd39782b13",
-            "env_var": {
-                "edge_id": "67863e1a5106660013816946",
-                "edge_name": "test_dev_copa_40",
-                "flow_id": "671953f155784c001a41d0dc"
+                "669e67db9cf2f66a12abcf4e": [],
+                "669e6ace6b954947e0ca8349": [],
+                "669e6cacae4aa04f041a7bd7": [],
+                "669e6e3132bcddbec6c87085": [],
+                "669e6ecbf6f5c064e628a628": [],
+                "66a0090abdb8ac00a76ab69b": [],
+                "66a00b7c88d650bb0124549d": [],
+                "66a010bdd369de02b2bf9773": [],
+                "66b233287a4427be81218361": [],
+                "66bbbc63022f5f23e283d61f": []
             },
-            "flow_test": false,
-            "frame_clock": 531004023732.429,
-            "frame_height": 147,
-            "frame_id": "9dadac7c-7884-496c-b59f-00006b5c12e132d617f3",
-            "frame_mat_type": 16,
-            "frame_seq": 1,
-            "frame_status": "OK",
-            "frame_time": 1737405910.5413952,
-            "frame_width": 327,
-            "input_frame_size": [
-                1848,
-                1149
-            ],
-            "input_label": "input_endpoint",
-            "input_name": "input_endpoint",
-            "input_window": [
-                [
-                    666,
-                    152
-                ],
-                [
-                    993,
-                    299
-                ]
-            ],
-            "inspection_id": "1737405909",
-            "output_data": {
-                "component_632b68ef3ae7b7cd39782b13": {
-                    "component_id": "632b68ef3ae7b7cd39782b13",
-                    "component_name": "CUTTER",
-                    "dataset_id": "66d9c4c5cadd295326d44783",
-                    "draw_format": "box",
-                    "draw_output": true,
-                    "flow_component_id": "5d96674dc00beadd67156657",
-                    "flow_component_name": "roi_cutter",
-                    "input_window": [
-                        [
-                            0,
-                            0
-                        ],
-                        [
-                            1848,
-                            1149
-                        ]
-                    ],
-                    "line_width": 1,
-                    "name": "CUTTER",
-                    "outputs": [
-                        {
-                            "bbox": {
-                                "x_max": 993,
-                                "x_min": 666,
-                                "y_max": 299,
-                                "y_min": 152
-                            },
-                            "bbox_normalized": {
-                                "x_max": 0.5373376623376623,
-                                "x_min": 0.36038961038961037,
-                                "y_max": 0.26022628372497825,
-                                "y_min": 0.13228894691035684
-                            },
-                            "class": "669e60125312469a1ac328dd",
-                            "color": "#00bcd4",
-                            "confidence": 0.735,
-                            "label": "LIQUIGAS"
-                        }
-                    ],
-                    "text_format": "{label}",
-                    "type": "cutter"
-                }
-            }
+            "text_format": "{label}",
+            "type": "cutter"
         },
-        {
-            "component_input": "component_632b68ef3ae7b7cd39782b13",
-            "component_output": "component_632bbaf920cd2dc5019b1923",
-            "env_var": {
-                "edge_id": "67863e1a5106660013816946",
-                "edge_name": "test_dev_copa_40",
-                "flow_id": "671953f155784c001a41d0dc"
-            },
-            "flow_test": false,
-            "frame_clock": 531004023732.429,
-            "frame_height": 121,
-            "frame_id": "9dadac7c-7884-496c-b59f-00006b5c12e132d617f3",
-            "frame_mat_type": 16,
-            "frame_seq": 1,
-            "frame_status": "OK",
-            "frame_time": 1737405910.5413952,
-            "frame_width": 233,
-            "input_frame_size": [
-                1848,
-                1149
-            ],
-            "input_label": "input_endpoint",
-            "input_name": "input_endpoint",
-            "input_window": [
-                [
-                    200,
-                    883
+        "creation_date": "2024-10-23T19:52:17.785Z",
+        "description": "Tara e vencimento Dev C++",
+        "modified_date": "2025-01-20T16:51:38.715Z",
+        "name": "Tara e vencimento Dev C++",
+        "package": "6099613b20da17001941822e",
+        "user": "61f02c33dbe6e0001a29a41b",
+        "version": 3
+    },
+    "1": {
+        "_id": "671953f155784c001a41d0dc",
+        "component_671954a3fe70f9afbd170fa2": {
+            "component_id": "5d96674dc00beadd67156657",
+            "component_name": "roi_cutter",
+            "dataset_id": "627e64c6edf5da001a60db2c",
+            "draw_format": "box",
+            "draw_output": true,
+            "line_width": 1,
+            "name": "roi_cutter",
+            "outputs": {
+                "627e64ba9e724e907b67e2e6": [
+                    {
+                        "bbox": {
+                            "x_max": 433,
+                            "x_min": 191,
+                            "y_max": 998,
+                            "y_min": 900
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.23458962440490722,
+                            "x_min": 0.10340074300765992,
+                            "y_max": 0.8689013618090757,
+                            "y_min": 0.7837881949800736
+                        },
+                        "class": "627e64ba9e724e907b67e2e6",
+                        "color": "#ffeb3b",
+                        "component_674e3d4657d99843339f626e": {
+                            "component_id": "674e3d4657d99843339f626e",
+                            "component_name": "TARA",
+                            "dataset_id": "65739542e935a8001b1648c7",
+                            "draw_format": "box",
+                            "draw_function": "boxes",
+                            "draw_output": true,
+                            "flow_component_id": "638e3bfee0dd9900c5d982ab",
+                            "flow_component_name": "roi_detection",
+                            "input_window": [
+                                [
+                                    200,
+                                    884
+                                ],
+                                [
+                                    433,
+                                    1005
+                                ]
+                            ],
+                            "line_width": 1,
+                            "name": "TARA",
+                            "outputs": {
+                                "0": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 374,
+                                            "x_min": 343,
+                                            "y_max": 979,
+                                            "y_min": 937
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.20238095238095238,
+                                            "x_min": 0.1856060606060606,
+                                            "y_max": 0.8520452567449956,
+                                            "y_min": 0.8154917319408181
+                                        },
+                                        "class": "0",
+                                        "color": "#3f51b5",
+                                        "confidence": 1.312,
+                                        "label": "0"
+                                    }
+                                ],
+                                "1": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 265,
+                                            "x_min": 244,
+                                            "y_max": 975,
+                                            "y_min": 929
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.14339826839826839,
+                                            "x_min": 0.13203463203463203,
+                                            "y_max": 0.8485639686684073,
+                                            "y_min": 0.8085291557876414
+                                        },
+                                        "class": "1",
+                                        "color": "#03a9f4",
+                                        "confidence": 1.433,
+                                        "label": "1"
+                                    }
+                                ],
+                                "2": [],
+                                "3": [],
+                                "4": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 297,
+                                            "x_min": 269,
+                                            "y_max": 978,
+                                            "y_min": 933
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.16071428571428573,
+                                            "x_min": 0.14556277056277056,
+                                            "y_max": 0.8511749347258486,
+                                            "y_min": 0.8120104438642297
+                                        },
+                                        "class": "4",
+                                        "color": "#ffeb3b",
+                                        "confidence": 1.399,
+                                        "label": "4"
+                                    }
+                                ],
+                                "5": [],
+                                "6": [],
+                                "7": [],
+                                "8": [],
+                                "9": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 341,
+                                            "x_min": 312,
+                                            "y_max": 980,
+                                            "y_min": 936
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.18452380952380953,
+                                            "x_min": 0.16883116883116883,
+                                            "y_max": 0.8529155787641427,
+                                            "y_min": 0.814621409921671
+                                        },
+                                        "class": "9",
+                                        "color": "#9c27b0",
+                                        "confidence": 1.149,
+                                        "label": "9"
+                                    }
+                                ]
+                            },
+                            "text_format": "{label}",
+                            "type": "annotator"
+                        },
+                        "confidence": 1.03,
+                        "label": "TARA"
+                    }
                 ],
-                [
-                    433,
-                    1004
-                ]
-            ],
-            "inspection_id": "1737405909",
-            "output_data": {
-                "component_632b68ef3ae7b7cd39782b13": {
-                    "component_id": "632b68ef3ae7b7cd39782b13",
-                    "component_name": "CUTTER",
-                    "dataset_id": "66d9c4c5cadd295326d44783",
-                    "draw_format": "box",
-                    "draw_output": true,
-                    "flow_component_id": "5d96674dc00beadd67156657",
-                    "flow_component_name": "roi_cutter",
-                    "input_window": [
-                        [
-                            0,
-                            0
-                        ],
-                        [
-                            1848,
-                            1149
-                        ]
-                    ],
-                    "line_width": 1,
-                    "name": "CUTTER",
-                    "outputs": [
-                        {
-                            "bbox": {
-                                "x_max": 433,
-                                "x_min": 200,
-                                "y_max": 1004,
-                                "y_min": 883
+                "627e66221e4f106a87cd858e": [
+                    {
+                        "bbox": {
+                            "x_max": 1163,
+                            "x_min": 891,
+                            "y_max": 735,
+                            "y_min": 458
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.6295484066009521,
+                            "x_min": 0.48261871337890627,
+                            "y_max": 0.6398898455866323,
+                            "y_min": 0.3991043285041192
+                        },
+                        "class": "627e66221e4f106a87cd858e",
+                        "color": "#ff5722",
+                        "component_674e3ec35cb32f23fb38f500": {
+                            "component_id": "674e3ec35cb32f23fb38f500",
+                            "component_name": "OCR VENCIMENTO",
+                            "dataset_id": "628b9a9b524aea001a727b83",
+                            "draw_format": "box",
+                            "draw_function": "boxes",
+                            "draw_output": true,
+                            "flow_component_id": "638e3bfee0dd9900c5d982ab",
+                            "flow_component_name": "roi_detection",
+                            "input_window": [
+                                [
+                                    892,
+                                    464
+                                ],
+                                [
+                                    1161,
+                                    729
+                                ]
+                            ],
+                            "line_width": 1,
+                            "name": "OCR VENCIMENTO",
+                            "outputs": {
+                                "0": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 1046,
+                                            "x_min": 1017,
+                                            "y_max": 534,
+                                            "y_min": 492
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.566017316017316,
+                                            "x_min": 0.5503246753246753,
+                                            "y_max": 0.46475195822454307,
+                                            "y_min": 0.4281984334203655
+                                        },
+                                        "class": "0",
+                                        "color": "#3f51b5",
+                                        "confidence": 1.125,
+                                        "label": "0"
+                                    }
+                                ],
+                                "1": [],
+                                "2": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 1090,
+                                            "x_min": 1053,
+                                            "y_max": 544,
+                                            "y_min": 501
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5898268398268398,
+                                            "x_min": 0.5698051948051948,
+                                            "y_max": 0.4734551784160139,
+                                            "y_min": 0.4360313315926893
+                                        },
+                                        "class": "2",
+                                        "color": "#009688",
+                                        "confidence": 0.984,
+                                        "label": "2"
+                                    }
+                                ],
+                                "3": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 979,
+                                            "x_min": 938,
+                                            "y_max": 563,
+                                            "y_min": 528
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5297619047619048,
+                                            "x_min": 0.5075757575757576,
+                                            "y_max": 0.4899912967798085,
+                                            "y_min": 0.4595300261096606
+                                        },
+                                        "class": "3",
+                                        "color": "#8bc34a",
+                                        "confidence": 0.94,
+                                        "label": "3"
+                                    },
+                                    {
+                                        "bbox": {
+                                            "x_max": 1006,
+                                            "x_min": 973,
+                                            "y_max": 541,
+                                            "y_min": 502
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5443722943722944,
+                                            "x_min": 0.5265151515151515,
+                                            "y_max": 0.47084421235857266,
+                                            "y_min": 0.43690165361183636
+                                        },
+                                        "class": "3",
+                                        "color": "#8bc34a",
+                                        "confidence": 0.641,
+                                        "label": "3"
+                                    }
+                                ],
+                                "4": [],
+                                "5": [],
+                                "6": [],
+                                "7": [],
+                                "8": [],
+                                "9": []
                             },
-                            "bbox_normalized": {
-                                "x_max": 0.2343073593073593,
-                                "x_min": 0.10822510822510822,
-                                "y_max": 0.8738033072236727,
-                                "y_min": 0.7684943429068756
-                            },
-                            "class": "627e64ba9e724e907b67e2e6",
-                            "color": "#ffeb3b",
-                            "confidence": 1.099,
-                            "label": "TARA"
-                        }
-                    ],
-                    "text_format": "{label}",
-                    "type": "cutter"
-                },
-                "component_632bbaf920cd2dc5019b1923": {
-                    "component_id": "632bbaf920cd2dc5019b1923",
-                    "component_name": "TARA",
-                    "dataset_id": "65739542e935a8001b1648c7",
-                    "draw_format": "box",
-                    "draw_function": "boxes",
-                    "draw_output": true,
-                    "flow_component_id": "638e3bfee0dd9900c5d982ab",
-                    "flow_component_name": "roi_detection",
-                    "input_window": [
-                        [
-                            200,
-                            883
-                        ],
-                        [
-                            433,
-                            1004
-                        ]
-                    ],
-                    "line_width": 1,
-                    "name": "TARA",
-                    "outputs": {
-                        "0": [
-                            {
-                                "bbox": {
-                                    "x_max": 373,
-                                    "x_min": 343,
-                                    "y_max": 979,
-                                    "y_min": 937
-                                },
-                                "bbox_normalized": {
-                                    "x_max": 0.20183982683982685,
-                                    "x_min": 0.1856060606060606,
-                                    "y_max": 0.8520452567449956,
-                                    "y_min": 0.8154917319408181
-                                },
-                                "class": "0",
-                                "color": "#3f51b5",
-                                "confidence": 1.202,
-                                "label": "0"
-                            }
-                        ],
-                        "1": [
-                            {
-                                "bbox": {
-                                    "x_max": 265,
-                                    "x_min": 244,
-                                    "y_max": 975,
-                                    "y_min": 930
-                                },
-                                "bbox_normalized": {
-                                    "x_max": 0.14339826839826839,
-                                    "x_min": 0.13203463203463203,
-                                    "y_max": 0.8485639686684073,
-                                    "y_min": 0.8093994778067886
-                                },
-                                "class": "1",
-                                "color": "#03a9f4",
-                                "confidence": 1.368,
-                                "label": "1"
-                            }
-                        ],
-                        "2": [],
-                        "3": [],
-                        "4": [
-                            {
-                                "bbox": {
-                                    "x_max": 297,
-                                    "x_min": 269,
-                                    "y_max": 977,
-                                    "y_min": 933
-                                },
-                                "bbox_normalized": {
-                                    "x_max": 0.16071428571428573,
-                                    "x_min": 0.14556277056277056,
-                                    "y_max": 0.8503046127067014,
-                                    "y_min": 0.8120104438642297
-                                },
-                                "class": "4",
-                                "color": "#ffeb3b",
-                                "confidence": 1.426,
-                                "label": "4"
-                            }
-                        ],
-                        "5": [],
-                        "6": [],
-                        "7": [],
-                        "8": [],
-                        "9": [
-                            {
-                                "bbox": {
-                                    "x_max": 341,
-                                    "x_min": 312,
-                                    "y_max": 980,
-                                    "y_min": 936
-                                },
-                                "bbox_normalized": {
-                                    "x_max": 0.18452380952380953,
-                                    "x_min": 0.16883116883116883,
-                                    "y_max": 0.8529155787641427,
-                                    "y_min": 0.814621409921671
-                                },
-                                "class": "9",
-                                "color": "#9c27b0",
-                                "confidence": 1.087,
-                                "label": "9"
-                            }
-                        ]
+                            "text_format": "{label}",
+                            "type": "annotator"
+                        },
+                        "confidence": 1.231,
+                        "label": "FERRADURA"
+                    }
+                ],
+                "669e6009215ba38bbf687c1a": [],
+                "669e60125312469a1ac328dd": [
+                    {
+                        "bbox": {
+                            "x_max": 1839,
+                            "x_min": 1623,
+                            "y_max": 238,
+                            "y_min": 104
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.9951298701298701,
+                            "x_min": 0.8782467532467533,
+                            "y_max": 0.2071366405570061,
+                            "y_min": 0.09051348999129678
+                        },
+                        "class": "669e60125312469a1ac328dd",
+                        "color": "#00bcd4",
+                        "confidence": 0.878,
+                        "label": "LIQUIGAS"
                     },
-                    "text_format": "{label}",
-                    "type": "annotator"
-                }
-            }
-        }
-    ]
+                    {
+                        "bbox": {
+                            "x_max": 994,
+                            "x_min": 665,
+                            "y_max": 299,
+                            "y_min": 152
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.5378787878787878,
+                            "x_min": 0.35984848484848486,
+                            "y_max": 0.26022628372497825,
+                            "y_min": 0.13228894691035684
+                        },
+                        "class": "669e60125312469a1ac328dd",
+                        "color": "#00bcd4",
+                        "confidence": 0.722,
+                        "label": "LIQUIGAS"
+                    }
+                ],
+                "669e67db9cf2f66a12abcf4e": [],
+                "669e6ace6b954947e0ca8349": [],
+                "669e6cacae4aa04f041a7bd7": [],
+                "669e6e3132bcddbec6c87085": [],
+                "669e6ecbf6f5c064e628a628": [],
+                "66a0090abdb8ac00a76ab69b": [],
+                "66a00b7c88d650bb0124549d": [],
+                "66a010bdd369de02b2bf9773": [],
+                "66b233287a4427be81218361": [],
+                "66bbbc63022f5f23e283d61f": []
+            },
+            "text_format": "{label}",
+            "type": "cutter"
+        },
+        "creation_date": "2024-10-23T19:52:17.785Z",
+        "description": "Tara e vencimento Dev C++",
+        "modified_date": "2025-01-20T16:51:38.715Z",
+        "name": "Tara e vencimento Dev C++",
+        "package": "6099613b20da17001941822e",
+        "user": "61f02c33dbe6e0001a29a41b",
+        "version": 3
+    },
+    "2": {
+        "_id": "671953f155784c001a41d0dc",
+        "component_671954a3fe70f9afbd170fa2": {
+            "component_id": "5d96674dc00beadd67156657",
+            "component_name": "roi_cutter",
+            "dataset_id": "627e64c6edf5da001a60db2c",
+            "draw_format": "box",
+            "draw_output": true,
+            "line_width": 1,
+            "name": "roi_cutter",
+            "outputs": {
+                "627e64ba9e724e907b67e2e6": [
+                    {
+                        "bbox": {
+                            "x_max": 433,
+                            "x_min": 191,
+                            "y_max": 998,
+                            "y_min": 900
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.23458962440490722,
+                            "x_min": 0.10340074300765992,
+                            "y_max": 0.8689013618090757,
+                            "y_min": 0.7837881949800736
+                        },
+                        "class": "627e64ba9e724e907b67e2e6",
+                        "color": "#ffeb3b",
+                        "component_674e3d4657d99843339f626e": {
+                            "component_id": "674e3d4657d99843339f626e",
+                            "component_name": "TARA",
+                            "dataset_id": "65739542e935a8001b1648c7",
+                            "draw_format": "box",
+                            "draw_function": "boxes",
+                            "draw_output": true,
+                            "flow_component_id": "638e3bfee0dd9900c5d982ab",
+                            "flow_component_name": "roi_detection",
+                            "input_window": [
+                                [
+                                    506,
+                                    464
+                                ],
+                                [
+                                    630,
+                                    588
+                                ]
+                            ],
+                            "line_width": 1,
+                            "name": "TARA",
+                            "outputs": {
+                                "0": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 618,
+                                            "x_min": 598,
+                                            "y_max": 528,
+                                            "y_min": 489
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.3344155844155844,
+                                            "x_min": 0.3235930735930736,
+                                            "y_max": 0.4595300261096606,
+                                            "y_min": 0.4255874673629243
+                                        },
+                                        "class": "0",
+                                        "color": "#3f51b5",
+                                        "confidence": 0.859,
+                                        "label": "0"
+                                    }
+                                ],
+                                "1": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 561,
+                                            "x_min": 541,
+                                            "y_max": 560,
+                                            "y_min": 522
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.30357142857142855,
+                                            "x_min": 0.29274891774891776,
+                                            "y_max": 0.48738033072236725,
+                                            "y_min": 0.45430809399477806
+                                        },
+                                        "class": "1",
+                                        "color": "#03a9f4",
+                                        "confidence": 0.9,
+                                        "label": "1"
+                                    }
+                                ],
+                                "2": [],
+                                "3": [],
+                                "4": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 579,
+                                            "x_min": 560,
+                                            "y_max": 550,
+                                            "y_min": 515
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.3133116883116883,
+                                            "x_min": 0.30303030303030304,
+                                            "y_max": 0.47867711053089645,
+                                            "y_min": 0.4482158398607485
+                                        },
+                                        "class": "4",
+                                        "color": "#ffeb3b",
+                                        "confidence": 0.659,
+                                        "label": "4"
+                                    }
+                                ],
+                                "5": [],
+                                "6": [],
+                                "7": [],
+                                "8": [],
+                                "9": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 603,
+                                            "x_min": 583,
+                                            "y_max": 537,
+                                            "y_min": 499
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.3262987012987013,
+                                            "x_min": 0.31547619047619047,
+                                            "y_max": 0.46736292428198434,
+                                            "y_min": 0.43429068755439515
+                                        },
+                                        "class": "9",
+                                        "color": "#9c27b0",
+                                        "confidence": 0.651,
+                                        "label": "9"
+                                    }
+                                ]
+                            },
+                            "text_format": "{label}",
+                            "type": "annotator"
+                        },
+                        "confidence": 1.03,
+                        "label": "TARA"
+                    }
+                ],
+                "627e66221e4f106a87cd858e": [
+                    {
+                        "bbox": {
+                            "x_max": 1163,
+                            "x_min": 891,
+                            "y_max": 735,
+                            "y_min": 458
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.6295484066009521,
+                            "x_min": 0.48261871337890627,
+                            "y_max": 0.6398898455866323,
+                            "y_min": 0.3991043285041192
+                        },
+                        "class": "627e66221e4f106a87cd858e",
+                        "color": "#ff5722",
+                        "component_674e3ec35cb32f23fb38f500": {
+                            "component_id": "674e3ec35cb32f23fb38f500",
+                            "component_name": "OCR VENCIMENTO",
+                            "dataset_id": "628b9a9b524aea001a727b83",
+                            "draw_format": "box",
+                            "draw_function": "boxes",
+                            "draw_output": true,
+                            "flow_component_id": "638e3bfee0dd9900c5d982ab",
+                            "flow_component_name": "roi_detection",
+                            "input_window": [
+                                [
+                                    892,
+                                    464
+                                ],
+                                [
+                                    1161,
+                                    729
+                                ]
+                            ],
+                            "line_width": 1,
+                            "name": "OCR VENCIMENTO",
+                            "outputs": {
+                                "0": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 1046,
+                                            "x_min": 1017,
+                                            "y_max": 534,
+                                            "y_min": 492
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.566017316017316,
+                                            "x_min": 0.5503246753246753,
+                                            "y_max": 0.46475195822454307,
+                                            "y_min": 0.4281984334203655
+                                        },
+                                        "class": "0",
+                                        "color": "#3f51b5",
+                                        "confidence": 1.125,
+                                        "label": "0"
+                                    }
+                                ],
+                                "1": [],
+                                "2": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 1090,
+                                            "x_min": 1053,
+                                            "y_max": 544,
+                                            "y_min": 501
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5898268398268398,
+                                            "x_min": 0.5698051948051948,
+                                            "y_max": 0.4734551784160139,
+                                            "y_min": 0.4360313315926893
+                                        },
+                                        "class": "2",
+                                        "color": "#009688",
+                                        "confidence": 0.984,
+                                        "label": "2"
+                                    }
+                                ],
+                                "3": [
+                                    {
+                                        "bbox": {
+                                            "x_max": 979,
+                                            "x_min": 938,
+                                            "y_max": 563,
+                                            "y_min": 528
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5297619047619048,
+                                            "x_min": 0.5075757575757576,
+                                            "y_max": 0.4899912967798085,
+                                            "y_min": 0.4595300261096606
+                                        },
+                                        "class": "3",
+                                        "color": "#8bc34a",
+                                        "confidence": 0.94,
+                                        "label": "3"
+                                    },
+                                    {
+                                        "bbox": {
+                                            "x_max": 1006,
+                                            "x_min": 973,
+                                            "y_max": 541,
+                                            "y_min": 502
+                                        },
+                                        "bbox_normalized": {
+                                            "x_max": 0.5443722943722944,
+                                            "x_min": 0.5265151515151515,
+                                            "y_max": 0.47084421235857266,
+                                            "y_min": 0.43690165361183636
+                                        },
+                                        "class": "3",
+                                        "color": "#8bc34a",
+                                        "confidence": 0.641,
+                                        "label": "3"
+                                    }
+                                ],
+                                "4": [],
+                                "5": [],
+                                "6": [],
+                                "7": [],
+                                "8": [],
+                                "9": []
+                            },
+                            "text_format": "{label}",
+                            "type": "annotator"
+                        },
+                        "confidence": 1.231,
+                        "label": "FERRADURA"
+                    }
+                ],
+                "669e6009215ba38bbf687c1a": [],
+                "669e60125312469a1ac328dd": [
+                    {
+                        "bbox": {
+                            "x_max": 1839,
+                            "x_min": 1623,
+                            "y_max": 238,
+                            "y_min": 104
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.9951298701298701,
+                            "x_min": 0.8782467532467533,
+                            "y_max": 0.2071366405570061,
+                            "y_min": 0.09051348999129678
+                        },
+                        "class": "669e60125312469a1ac328dd",
+                        "color": "#00bcd4",
+                        "confidence": 0.878,
+                        "label": "LIQUIGAS"
+                    },
+                    {
+                        "bbox": {
+                            "x_max": 994,
+                            "x_min": 665,
+                            "y_max": 299,
+                            "y_min": 152
+                        },
+                        "bbox_normalized": {
+                            "x_max": 0.5378787878787878,
+                            "x_min": 0.35984848484848486,
+                            "y_max": 0.26022628372497825,
+                            "y_min": 0.13228894691035684
+                        },
+                        "class": "669e60125312469a1ac328dd",
+                        "color": "#00bcd4",
+                        "confidence": 0.722,
+                        "label": "LIQUIGAS"
+                    }
+                ],
+                "669e67db9cf2f66a12abcf4e": [],
+                "669e6ace6b954947e0ca8349": [],
+                "669e6cacae4aa04f041a7bd7": [],
+                "669e6e3132bcddbec6c87085": [],
+                "669e6ecbf6f5c064e628a628": [],
+                "66a0090abdb8ac00a76ab69b": [],
+                "66a00b7c88d650bb0124549d": [],
+                "66a010bdd369de02b2bf9773": [],
+                "66b233287a4427be81218361": [],
+                "66bbbc63022f5f23e283d61f": []
+            },
+            "text_format": "{label}",
+            "type": "cutter"
+        },
+        "creation_date": "2024-10-23T19:52:17.785Z",
+        "description": "Tara e vencimento Dev C++",
+        "modified_date": "2025-01-20T16:51:38.715Z",
+        "name": "Tara e vencimento Dev C++",
+        "package": "6099613b20da17001941822e",
+        "user": "61f02c33dbe6e0001a29a41b",
+        "version": 3
+    }
 }

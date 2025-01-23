@@ -13,6 +13,7 @@ namespace copa
                 std::string cylinder_expiration_date_ocr_name = "OCR VENCIMENTO", 
                 std::string tare_class_label = "TARA", std::string expiration_date_class_label = "FERRADURA", std::string color_class_label = "COR BOTIJAO") : m_flow_data(flow_data),m_main_cutter_name(main_cutter_name), m_cylinder_tare_ocr_name(cylinder_tare_ocr_name), m_cylinder_expiration_date_ocr_name(cylinder_expiration_date_ocr_name), m_tare_class_label(tare_class_label), m_expiration_date_class_label(expiration_date_class_label), m_color_class_label(color_class_label)
         {
+            max_centroid_distance = 100;
             LOG(INFO) << "ConsolidateResult constructor called";
         }
 
@@ -22,6 +23,7 @@ namespace copa
         }
 
         void prepare_parms();
+        json run(json result);
 
     private:
         json m_flow_data;
@@ -31,6 +33,7 @@ namespace copa
         std::string m_tare_class_label;
         std::string m_expiration_date_class_label;
         std::string m_color_class_label;
+        int max_centroid_distance;
 
         json get_node_components_data(json flow_data ,
             std::string main_cutter_name,std::string cylinder_tare_ocr_name,
