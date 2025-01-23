@@ -269,11 +269,11 @@ namespace copa
 
         std::string generate_id();
         void send_images();
-        void extract_classes(const json &node, std::unordered_set<std::string> &classes);
-        void update_tara(json &json_schema, const json &value);
-        void update_ferradura(json &json_schema, const json &value);
-        void update_brand(json &json_schema, const json &value);
-        void updateJsonByKey(std::string name, json &jsonData, const std::string &key, const json &newValue);
+        // void extract_classes(const json &node, std::unordered_set<std::string> &classes);
+        // void update_tara(json &json_schema, const json &value);
+        // void update_ferradura(json &json_schema, const json &value);
+        // void update_brand(json &json_schema, const json &value);
+        void update_schema(std::string name, json &jsonData, const std::string &key, const json &newValue);
         void update_brand(std::string name, json &jsonData, const std::string &key, const json &newValue);
     };
 }

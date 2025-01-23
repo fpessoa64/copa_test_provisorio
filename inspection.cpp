@@ -31,60 +31,26 @@ namespace copa
         }
     }
 
-    void Inspection::update_data(const std::string &key, const json &value)
+   
+    void Inspection::update_schema(std::string name, json &jsonData, const std::string &key, const json &newValue)
     {
-        // data_[key] = value;
-    }
-
-    void Inspection::update_ferradura(json &json_schema, const json &value)
-    {
-        json c = json_schema["component_632b6916044e9ebb72172e36"].value("outputs", json::object());
-        std::cout << "component_632b6916044e9ebb72172e36: " << c.dump() << std::endl;
-        json outputs = json_schema["component_632b6916044e9ebb72172e36"].is_object() ? json_schema["component_632b68ef3ae7b7cd39782b13"].value("outputs", json::object()) : json::object();
-
-        for (auto &output : outputs.items())
-        {
-            // std::cout << "output: " << output.key() << " value: " << output.value() <<std::endl;
-            for (auto &output_data : output.value())
-            {
-                // std::cout << "output_data dump: " << output_data.dump() <<std::endl;
-                if (output_data["label"] == "FERRADURA")
-                {
-                    std::cout << "LOG " << "output_data: " << output_data.dump() << std::endl;
-                    output_data["bbox"] = value.value("bbox", json::object());
-                    output_data["bbox_normalized"] = value.value("bbox_normalized", json::object());
-                    output_data["confidence"] = value.value("confidence", 0);
-                    output_data["component_632b68ef3ae7b7cd39782b13"]["outputs"] = value.value("outputs", json::object());
-                    std::cout << "LOG " << "output_data modified ferradura: " << output_data.dump() << std::endl;
-                    // output_data["value"] = value;
-                }
-            }
-        }
-        json_schema["component_632b68ef3ae7b7cd39782b13"]["outputs"] = outputs;
-    }
-
-    void Inspection::updateJsonByKey(std::string name, json &jsonData, const std::string &key, const json &newValue)
-    {
-        std::cout << "LOG " << " updateJsonByKey key: " << key << " value: " << newValue.dump() << std::endl;
         if (jsonData.is_object())
         {
             for (auto &[k, v] : jsonData.items())
             {
                 if (k == key)
                 {
-                    std::cout << "LOG Found " << "updateJsonByKey key: " << key << " value: " << v.dump() << std::endl;
                     v = newValue;
                     return;
-                   
                 }
-                updateJsonByKey(name,v, key, newValue);
+                update_schema(name,v, key, newValue);
             }
         }
         else if (jsonData.is_array())
         {
             for (auto &item : jsonData)
             {
-                updateJsonByKey(name,item, key, newValue);
+                update_schema(name,item, key, newValue);
             }
         }
     }
@@ -92,18 +58,13 @@ namespace copa
 
     void Inspection::update_brand(std::string name, json &jsonData, const std::string &key, const json &newValue)
     {
-        std::cout << "LOG " << " update_brand key: " << key << " value: " << newValue.dump() << std::endl;
         if (jsonData.is_object())
         {
             for (auto &[k, v] : jsonData.items())
             {
-                std::cout << "LOG " << " update_brand key_0: " << k << " value: " << v.dump() << std::endl;
                 if (k == key)
                 {
-                    
-                    std::cout << "LOG Found " << "update_brand key key: " << key << " value: " << v.dump() << std::endl;
                     v.push_back(newValue);
-                    //v = newValue;
                     return;
                    
                 }
@@ -113,65 +74,9 @@ namespace copa
         else if (jsonData.is_array())
         {
             for (auto &item : jsonData)
-            {
-                std::cout << "LOG " << " update_brand item: " << item.dump() << std::endl;  
+            { 
                 update_brand(name,item, key, newValue);
             }
-        }
-    }
-    //--------------------------------------------------------------------------------
-    
-    void Inspection::update_brand(json &json_schema, const json &value)
-    {
-        json c = json_schema["component_632b68ef3ae7b7cd39782b13"].value("outputs", json::object());
-        // std::cout << "component_632b68ef3ae7b7cd39782b13: " << c.dump() << std::endl;
-        json outputs = json_schema["component_632b68ef3ae7b7cd39782b13"].is_object() ? json_schema["component_632b68ef3ae7b7cd39782b13"].value("outputs", json::object()) : json::object();
-        const std::string class_id = value.value("class", "");
-        if (class_id.empty())
-        {
-            std::cerr << "class_id is empty" << std::endl;
-            return;
-        }
-        std::cout << "LOG class_id: " << class_id << " outputs:  " << outputs.dump() << std::endl;
-        if (outputs.contains(class_id))
-        {
-            json output = outputs.value(class_id, json::array());
-            output.push_back(value);
-            outputs[class_id] = output;
-            std::cout << "LOG output update class_id : " << output.dump() << std::endl;
-            json_schema["component_632b68ef3ae7b7cd39782b13"]["outputs"] = outputs;
-        }
-        else
-        {
-            std::cerr << "LOG class_id not found: " << class_id << std::endl;
-        }
-    }
-    //--------------------------------------------------------------------------------
-
-    void Inspection::extract_classes(const json &node, std::unordered_set<std::string> &classes)
-    {
-
-        if (node.is_object())
-        {
-            for (auto it = node.begin(); it != node.end(); ++it)
-            {
-                std::cout << "node: " << it.value() << std::endl;
-                extract_classes(it.value(), classes);
-            }
-        }
-        else if (node.is_array())
-        {
-
-            for (const auto &item : node)
-            {
-                std::cout << "node array: " << item.dump() << std::endl;
-                extract_classes(item, classes);
-            }
-        }
-        else if (node.is_string() && node.contains("class"))
-        {
-            std::cout << "class: " << node.get<std::string>() << " node: " << node.dump() << std::endl;
-            classes.insert(node.get<std::string>());
         }
     }
     //--------------------------------------------------------------------------------
@@ -183,46 +88,49 @@ namespace copa
         json consolidate;
         json consolidated_data;
         int index = 0;
-        for (auto &image : data_images)
+
+        std::ifstream file("/workspaces/c++/conf/schema.json");
+        if (!file.is_open())
         {
-            json c = image.second->consolidate();
-            if (c != nullptr)
-                consolidated_data[std::to_string(index++)] = c;
+            throw std::runtime_error("Could not open parms.json");
         }
-        std::cout << "LOG - consolidated_data: " << consolidated_data.dump() << std::endl;
+        json template_schema_json = json::parse(file);
+        file.close();
 
-        for (auto &[k, v] : consolidated_data.items()) {
-            std::ifstream file("/workspaces/c++/conf/schema.json");
-            if (!file.is_open())
-            {
-                throw std::runtime_error("Could not open parms.json");
-            }
-            json schema_json = json::parse(file);
-            file.close();
-
-            std::cout << "LOG - key: " << k << " result: " << v.dump() << std::endl;
-            for(auto &v1 : v) {
+        // for (auto &image : data_images)
+        // {
+        //     json c = image.second->consolidate();
+        //     if (c != nullptr)
+        //         consolidated_data[std::to_string(index++)] = c;
+        // }
+        //std::cout << "LOG - consolidated_data: " << consolidated_data.dump() << std::endl;
+        for (auto &image : data_images) {
+            json consolidated_data = image.second->consolidate();
+            if(consolidated_data == nullptr || consolidated_data.empty()) {
+                continue;
+            }            
+            json schema_json = template_schema_json;
+            for(auto &v1 : consolidated_data) {
                 std::cout << "LOG - v1: " << v1.dump() << std::endl;
                 for (auto &[k2,v2]: v1["output_data"].items()) {
-                    std::cout << "LOG - "<< " k2: " << k2 <<  " v2: " << v2.dump() << std::endl;
+                    //std::cout << "LOG - "<< " k2: " << k2 <<  " v2: " << v2.dump() << std::endl;
                     std::string name = v2.value("name","");
                     if(name == "TARA") {
-                        std::cout << "LOG - k2: " << k2  << " update tara: " << v2.dump() << std::endl;
+                        //std::cout << "LOG - k2: " << k2  << " update tara: " << v2.dump() << std::endl;
                         std::string key = "component_" + v2.value("component_id","");
-                        updateJsonByKey("TARA",schema_json, key, v2);
-                        //update_tara(schema_json,v2);
+                        update_schema("TARA",schema_json, key, v2);
                     }
                     else if(name == "OCR VENCIMENTO") {
-                        std::cout << "LOG - k2: " << k2  << " update ferradura: " << v2.dump() << std::endl;
+                        //std::cout << "LOG - k2: " << k2  << " update ferradura: " << v2.dump() << std::endl;
                         std::string key = "component_" + v2.value("component_id","");
-                        updateJsonByKey("FERRADURA",schema_json, key, v2);
+                        update_schema("FERRADURA",schema_json, key, v2);
                     }
                     else if(name == "CUTTER") {
-                        std::cout << "LOG - k2: " << k2  << " update cutter: " << v2.dump() << std::endl;
+                        //std::cout << "LOG - k2: " << k2  << " update cutter: " << v2.dump() << std::endl;
                         
                         for (auto &output : v2["outputs"])
                         {
-                            std::cout << "LOG - "<< " output: " << output.dump() << std::endl;
+                            //std::cout << "LOG - "<< " output: " << output.dump() << std::endl;
                             std::string label = output.value("label","");
                             if(label != "TARA" && label != "FERRADURA" && label != "") {
                                 std::string key = output.value("class","");
@@ -234,8 +142,7 @@ namespace copa
                     }
                 }
             }
-            std::cout << "LOG - schema_json: " << schema_json.dump() << std::endl;
-            consolidate[k] = schema_json;
+            consolidate[std::to_string(index++)] = schema_json;
         }
         return consolidate ;
     }
