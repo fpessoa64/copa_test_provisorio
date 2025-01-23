@@ -32,7 +32,7 @@ namespace copa
     }
 
    
-    void Inspection::update_schema(std::string name, json &jsonData, const std::string &key, const json &newValue)
+    void Inspection::update_schema(json &jsonData, const std::string &key, const json &newValue)
     {
         if (jsonData.is_object())
         {
@@ -43,14 +43,14 @@ namespace copa
                     v = newValue;
                     return;
                 }
-                update_schema(name,v, key, newValue);
+                update_schema(v, key, newValue);
             }
         }
         else if (jsonData.is_array())
         {
             for (auto &item : jsonData)
             {
-                update_schema(name,item, key, newValue);
+                update_schema(item, key, newValue);
             }
         }
     }
@@ -118,12 +118,12 @@ namespace copa
                     if(name == "TARA") {
                         //std::cout << "LOG - k2: " << k2  << " update tara: " << v2.dump() << std::endl;
                         std::string key = "component_" + v2.value("component_id","");
-                        update_schema("TARA",schema_json, key, v2);
+                        update_schema(schema_json, key, v2);
                     }
                     else if(name == "OCR VENCIMENTO") {
                         //std::cout << "LOG - k2: " << k2  << " update ferradura: " << v2.dump() << std::endl;
                         std::string key = "component_" + v2.value("component_id","");
-                        update_schema("FERRADURA",schema_json, key, v2);
+                        update_schema(schema_json, key, v2);
                     }
                     else if(name == "CUTTER") {
                         //std::cout << "LOG - k2: " << k2  << " update cutter: " << v2.dump() << std::endl;

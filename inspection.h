@@ -273,7 +273,7 @@ namespace copa
         // void update_tara(json &json_schema, const json &value);
         // void update_ferradura(json &json_schema, const json &value);
         // void update_brand(json &json_schema, const json &value);
-        void update_schema(std::string name, json &jsonData, const std::string &key, const json &newValue);
+        void update_schema(json &jsonData, const std::string &key, const json &newValue);
         void update_brand(std::string name, json &jsonData, const std::string &key, const json &newValue);
     };
 }
