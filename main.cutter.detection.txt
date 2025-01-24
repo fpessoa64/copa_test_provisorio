@@ -119,6 +119,7 @@ public:
     std::vector<std::vector<json>> get_ocr_detections() const {
         return ocr_detections_list;
     }
+    
 
     void add_ocr_detection(const json& component_data) {
         if (component_data.contains(ocr_component_key)) {

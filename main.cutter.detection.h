@@ -14,7 +14,80 @@ private:
     json component_data;
     json centroid;
     std::string ocr_component_key;
-    std::vector<std::vector<json>> ocr_detections_list;
+    json  ocr_detections_list;
+
+    double getIoU(const json& bbox1, const json& bbox2) {
+        double x_min = std::max(bbox1["x_min"].get<double>(), bbox2["x_min"].get<double>());
+        double y_min = std::max(bbox1["y_min"].get<double>(), bbox2["y_min"].get<double>());
+        double x_max = std::min(bbox1["x_max"].get<double>(), bbox2["x_max"].get<double>());
+        double y_max = std::min(bbox1["y_max"].get<double>(), bbox2["y_max"].get<double>());
+
+        double intersection = std::max(0.0, x_max - x_min) * std::max(0.0, y_max - y_min);
+        double area1 = (bbox1["x_max"].get<double>() - bbox1["x_min"].get<double>()) * (bbox1["y_max"].get<double>() - bbox1["y_min"].get<double>());
+        double area2 = (bbox2["x_max"].get<double>() - bbox2["x_min"].get<double>()) * (bbox2["y_max"].get<double>() - bbox2["y_min"].get<double>());
+        double union_area = area1 + area2 - intersection;
+
+        return intersection / union_area;
+    }
+
+    std::tuple<double, double>  get_center(json& bbox) 
+    {
+
+        double center_x = (bbox.value("x_min",0.0) + bbox.value("x_max",0.0)) / 2;
+        double center_y = (bbox.value("y_min",0.0) + bbox.value("y_max",0.0)) / 2;
+
+        return std::make_tuple(center_x,center_y);
+    }
+
+    /**
+     def remove_overlapping_detections(detections):
+
+    if len(detections) < 2:
+        return detections, []
+
+    detections.sort(key=lambda x: x["confidence"], reverse=True)
+
+    filtered_detections = []
+    removed_detections = []
+    for detection in detections:
+        for filtered_detection in filtered_detections:
+            if get_iou(detection["bbox"], filtered_detection["bbox"]) > 0.8:
+                removed_detections.append(detection)
+                break
+        else:
+            filtered_detections.append(detection)
+
+
+    return filtered_detections, removed_detections
+ 
+     */
+    std::tuple<json,json> remove_overlapping_detections(json & detections) {
+        if (detections.size() < 2) {
+            return std::make_pair(detections,json::array());
+        }
+        // detections.sort(key=lambda x: x["confidence"], reverse=True)
+        std::sort(detections.begin(), detections.end(), [](const json& a, const json& b) {
+            return a["confidence"].get<double>() > b["confidence"].get<double>();
+        });
+
+        json filtered_detections;
+        json removed_detections;
+        for (const auto& detection : detections) {
+            bool is_overlapping = false;
+            for (const auto& filtered_detection : filtered_detections) {
+                if (getIoU(detection["bbox"], filtered_detection["bbox"]) > 0.8) {
+                    removed_detections.push_back(detection);
+                    is_overlapping = true;
+                    break;
+                }
+            }
+            if (!is_overlapping) {
+                filtered_detections.push_back(detection);
+            }
+        }
+
+        return std::make_tuple(filtered_detections, removed_detections);
+    }
 
 public:
     MainCutterDetection(const json& component_data, const std::string& ocr_component_key)
@@ -23,6 +96,8 @@ public:
         type = component_data["type"];
         centroid = component_data["centroid"];
         add_ocr_detection(component_data);
+        ocr_detections_list = json::array();
+
     }
 
     std::string get_type() const {
@@ -47,6 +122,7 @@ public:
     std::vector<std::vector<json>> get_ocr_detections() const {
         return ocr_detections_list;
     }
+    
 
     void add_ocr_detection(const json& component_data) {
         if (component_data.contains(ocr_component_key)) {
@@ -109,9 +185,7 @@ public:
                     }
                 }
             }
-        }else if (type == "expiration_date") {
         }
         // Additional logic for "expiration_date" type can be implemented similarly.
     }
-   
 };
