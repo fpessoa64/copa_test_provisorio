@@ -1,3 +1,6 @@
+#ifndef _CONSOLIDATE_RESULT_H_
+#define _CONSOLIDATE_RESULT_H_
+
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include "glog/logging.h"
@@ -46,3 +49,5 @@ namespace copa
 
     };
 } // namespace copa
+
+#endif // _CONSOLIDATE_RESULT_H_

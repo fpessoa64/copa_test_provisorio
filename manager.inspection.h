@@ -1,3 +1,7 @@
+
+#ifndef COPA_INSPECTION_MANAGER_H
+#define COPA_INSPECTION_MANAGER_H
+
 #include "common.h"
 #include "inspection.h"
 #include <mutex>
@@ -33,3 +37,4 @@ namespace copa
     };
 
 }
+#endif // COPA_INSPECTION_MANAGER_H

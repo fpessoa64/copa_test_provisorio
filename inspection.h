@@ -1,3 +1,5 @@
+#ifndef _INSPECTION_H_
+#define _INSPECTION_H_
 
 #include <iostream>
 #include <nlohmann/json.hpp>
@@ -282,4 +284,6 @@ namespace copa
         void start_consolidation_thread(int consolidation_interval) ;
         void stop_consolidation_thread();
     };
-}
+};
+
+#endif // _INSPECTION_H_

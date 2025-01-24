@@ -367,6 +367,7 @@ class ConsolidateResults:
             "tare": [],
             "expiration_date": []
         }
+        
         brand_detections = {
             "exists": False,
             "brand": {
@@ -390,10 +391,9 @@ class ConsolidateResults:
                 component = result[component_key]
                 log.info(f'component: {component}')
           
-            
                 valid_class_id_list = [class_id for class_id in component["outputs"].keys() if class_id in [self.node_components["tare_class_id"], self.node_components["expiration_date_class_id"]]]
                 log.info(f'valid_class_list: {valid_class_id_list}')
-                continue
+
                 brands = []
                 for key in self.node_components.keys():
                     log.info(f'valid_class_list: {key} value: {self.node_components[key]}')
@@ -405,7 +405,8 @@ class ConsolidateResults:
 
 
                 log.info(f'brands: {brands} ')
-
+                log.info(f'valid_class_list: {valid_class_id_list}')
+                
                 for class_id in valid_class_id_list:
                      for detection in component["outputs"][class_id]:
                         log.info(f'detection: {detection} ')

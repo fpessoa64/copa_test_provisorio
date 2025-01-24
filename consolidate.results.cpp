@@ -1,4 +1,5 @@
 #include "consolidate.results.h"
+#include "main.cutter.detection.h"
 
 namespace copa {
 
@@ -93,6 +94,9 @@ namespace copa {
         };
         bool tare_plate_dectected = false;
 
+        std::map <std::string, std::unique_ptr<MainCutterDetection>> results_map;
+
+
         for(auto &[key, result] : results.items())
         {
             LOG(INFO) << "processing result: key: " << key << " val: " << result.dump();
@@ -126,6 +130,64 @@ namespace copa {
                         }
                     }
                     LOG(INFO) << "valid_class_list: " << valid_class_id_list.dump();
+
+                    for(const std::string class_id : valid_class_id_list)
+                    {
+                        LOG(INFO) << "class_id: " << class_id;
+                        LOG(INFO) << "component[outputs][class_id]: " << component["outputs"][class_id].dump();
+                        for(auto &detection : component["outputs"][class_id])
+                        {
+                            LOG(INFO) << "detection: " << detection.dump();
+                            tare_plate_dectected |= detection["label"] == "TARA";
+
+                            detection["centroid"] = {
+                                (detection["bbox"].value("x_min",0) + detection["bbox"].value("x_max",0)) / 2,
+                                (detection["bbox"].value("y_min",0) + detection["bbox"].value("y_max",0)) / 2
+                            };
+                            if(class_id == m_node_components["expiration_date_class_id"])
+                            {
+                                detection["type"] = "expiration_date";
+                            }
+                            else
+                            {
+                                detection["type"] = "tare";
+                            }
+                            //       for cutter_detection in main_cutter_detections[detection["type"]]:
+                            //     distance = math.dist(detection["centroid"], cutter_detection.get_centroid())
+                            //     # if same detection
+                            //     if cutter_detection.get_type() == detection["type"] and distance < self.max_centroid_distance:
+                            //         cutter_detection.add_ocr_detection(detection)
+                            //         break
+                            // else:
+                            //     component_key = self.node_components["ocr_tare_component"] if detection["type"] == "tare" else self.node_components["ocr_expiration_date_component"]
+                            //     main_cutter_detections[detection["type"]].append(MainCutterDetection(detection, component_key))
+                            // }
+                            for (auto &cutter_detection : main_cutter_detections[detection.value("type","tare")])
+                            {
+                                // distance = math.dist(detection["centroid"], cutter_detection.get_centroid())
+                                // # if same detection
+                                // if cutter_detection.get_type() == detection["type"] and distance < self.max_centroid_distance:
+                                //     cutter_detection.add_ocr_detection(detection)
+                                //     break
+                                // else:
+                                //     component_key = self.node_components["ocr_tare_component"] if detection["type"] == "tare" else self.node_components["ocr_expiration_date_component"]
+                                //     main_cutter_detections[detection["type"]].append(MainCutterDetection(detection, component_key))
+                                // }
+                            }   
+                        }
+                    }
+
+                    // brands = []
+                    // for key in self.node_components.keys():
+                    //     log.info(f'valid_class_list: {key} value: {self.node_components[key]}')
+                    //     if key != 'main_cutter' and key != 'tare_class_id' \
+                    //         and key != 'expiration_date_class_id' and key != 'ocr_tare_component' and key != 'ocr_expiration_date_component':
+                    //         brands.append(self.node_components[key])
+                    //         valid_class_id_list.append(self.node_components[key])
+
+                    // log.info(f'brands: {brands} ')
+
+                 
 
                 }
             }
