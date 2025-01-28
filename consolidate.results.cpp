@@ -76,6 +76,16 @@ namespace copa {
     }
     //--------------------------------------------------------------------------------
 
+    double ConsolidateResult::get_distance(json bbox1, json bbox2)
+    {
+        double x1 = (bbox1.value("x_min",0) + bbox1.value("x_max",0)) / 2;
+        double y1 = (bbox1.value("y_min",0) + bbox1.value("y_max",0)) / 2;
+        double x2 = (bbox2.value("x_min",0) + bbox2.value("x_max",0)) / 2;
+        double y2 = (bbox2.value("y_min",0) + bbox2.value("y_max",0)) / 2;
+        return std::sqrt(std::pow(x1 - x2, 2) + std::pow(y1 - y2, 2));
+    }
+    //--------------------------------------------------------------------------------
+
     json ConsolidateResult::run(json &results)
     {
         LOG(INFO) << "run called << " << results.dump();
@@ -84,7 +94,7 @@ namespace copa {
             {"color", json::object()},
             {"exists", false}
         };
-        json main_cutter_detections = {
+        json main_cutter_detections2 = {
             {"tare", json::array()},
             {"expiration_date",json::array()}
         };
@@ -94,7 +104,8 @@ namespace copa {
         };
         bool tare_plate_dectected = false;
 
-        std::map <std::string, std::unique_ptr<MainCutterDetection>> results_map;
+
+        std::map <std::string, std::vector<MainCutterDetection *>> main_cutter_detections;
 
 
         for(auto &[key, result] : results.items())
@@ -152,6 +163,28 @@ namespace copa {
                             {
                                 detection["type"] = "tare";
                             }
+
+                            MainCutterDetection *main_cutter = nullptr;
+                            bool found = false;
+                            for(auto &cutter_detection : main_cutter_detections[detection["type"]])
+                            {
+                                found = true;
+                                double distance = get_distance(detection["centroid"], cutter_detection->get_centroid());
+                                LOG(INFO) << "distance: " << distance;
+                                //distance = math.dist(detection["centroid"], cutter_detection.get_centroid())
+                                // # if same detection
+                                // if cutter_detection.get_type() == detection["type"] and distance < self.max_centroid_distance:
+                                //     cutter_detection.add_ocr_detection(detection)
+                                //     breaks
+                            }
+
+                            if(!found) {
+                                std::string component_key = detection["type"] == "tare" ? m_node_components["ocr_tare_component"] : m_node_components["ocr_expiration_date_component"];
+                                LOG(INFO) << "component_key: " << component_key;
+                                main_cutter_detections[detection["type"]].push_back(new MainCutterDetection(detection, component_key));
+                            }
+            
+
                             //       for cutter_detection in main_cutter_detections[detection["type"]]:
                             //     distance = math.dist(detection["centroid"], cutter_detection.get_centroid())
                             //     # if same detection
@@ -162,18 +195,7 @@ namespace copa {
                             //     component_key = self.node_components["ocr_tare_component"] if detection["type"] == "tare" else self.node_components["ocr_expiration_date_component"]
                             //     main_cutter_detections[detection["type"]].append(MainCutterDetection(detection, component_key))
                             // }
-                            for (auto &cutter_detection : main_cutter_detections[detection.value("type","tare")])
-                            {
-                                // distance = math.dist(detection["centroid"], cutter_detection.get_centroid())
-                                // # if same detection
-                                // if cutter_detection.get_type() == detection["type"] and distance < self.max_centroid_distance:
-                                //     cutter_detection.add_ocr_detection(detection)
-                                //     break
-                                // else:
-                                //     component_key = self.node_components["ocr_tare_component"] if detection["type"] == "tare" else self.node_components["ocr_expiration_date_component"]
-                                //     main_cutter_detections[detection["type"]].append(MainCutterDetection(detection, component_key))
-                                // }
-                            }   
+                           
                         }
                     }
 

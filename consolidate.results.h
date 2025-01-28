@@ -45,6 +45,8 @@ namespace copa
             std::string tare_class_label,
             std::string expiration_date_class_label,
             std::string color_class_label) ;
+        
+        double get_distance(json bbox1, json bbox2);
 
 
     };
