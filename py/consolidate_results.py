@@ -433,6 +433,7 @@ class ConsolidateResults:
                         
                         for cutter_detection in main_cutter_detections[detection["type"]]:
                             distance = math.dist(detection["centroid"], cutter_detection.get_centroid())
+                            log.info(f'distance: {distance}   type: {detection["type"]} ')
                             # if same detection
                             if cutter_detection.get_type() == detection["type"] and distance < self.max_centroid_distance:
                                 cutter_detection.add_ocr_detection(detection)

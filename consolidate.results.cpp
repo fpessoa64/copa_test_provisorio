@@ -76,13 +76,13 @@ namespace copa {
     }
     //--------------------------------------------------------------------------------
 
-    double ConsolidateResult::get_distance(json bbox1, json bbox2)
+    double ConsolidateResult::get_distance(json bbox1,json  bbox2)
     {
-        double x1 = (bbox1.value("x_min",0) + bbox1.value("x_max",0)) / 2;
-        double y1 = (bbox1.value("y_min",0) + bbox1.value("y_max",0)) / 2;
-        double x2 = (bbox2.value("x_min",0) + bbox2.value("x_max",0)) / 2;
-        double y2 = (bbox2.value("y_min",0) + bbox2.value("y_max",0)) / 2;
-        return std::sqrt(std::pow(x1 - x2, 2) + std::pow(y1 - y2, 2));
+        // double x1 = (bbox1.value("x_min",0) + bbox1.value("x_max",0)) / 2;
+        // double y1 = (bbox1.value("y_min",0) + bbox1.value("y_max",0)) / 2;
+        // double x2 = (bbox2.value("x_min",0) + bbox2.value("x_max",0)) / 2;
+        // double y2 = (bbox2.value("y_min",0) + bbox2.value("y_max",0)) / 2;
+        return std::sqrt(std::pow(bbox1.value("x",0.0) - bbox1.value("x",0.0), 2) + std::pow(bbox1.value("y",0.0) - bbox2.value("y",0.0), 2));
     }
     //--------------------------------------------------------------------------------
 
@@ -164,10 +164,11 @@ namespace copa {
                                 detection["type"] = "tare";
                             }
 
-                            MainCutterDetection *main_cutter = nullptr;
                             bool found = false;
                             for(auto &cutter_detection : main_cutter_detections[detection["type"]])
                             {
+                               //LOG(INFO) << "cutter_detection get_centroid: " << cutter_detection->get_centroid().dump();
+                                LOG(INFO) << "detection: " << detection["centroid"].dump();
                                 found = true;
                                 double distance = get_distance(detection["centroid"], cutter_detection->get_centroid());
                                 LOG(INFO) << "distance: " << distance;

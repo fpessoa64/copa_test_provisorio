@@ -30,13 +30,16 @@ private:
         return intersection / union_area;
     }
 
-    std::tuple<double, double>  get_center(json& bbox) 
+    json  get_center(json& bbox) 
     {
 
         double center_x = (bbox.value("x_min",0.0) + bbox.value("x_max",0.0)) / 2;
         double center_y = (bbox.value("y_min",0.0) + bbox.value("y_max",0.0)) / 2;
 
-        return std::make_tuple(center_x,center_y);
+        return {
+            {"x", center_x},
+            {"y", center_y}
+        };
     }
 
     /**
@@ -115,11 +118,14 @@ public:
         };
     }
 
-    json get_centroid() const {
+    json  get_centroid() const {
         return centroid;
     }
 
-    std::vector<std::vector<json>> get_ocr_detections() const {
+    /**
+     * 
+     */
+    json  get_ocr_detections() const {
         return ocr_detections_list;
     }
     
