@@ -78,10 +78,7 @@ namespace copa {
 
     double ConsolidateResult::get_distance(json bbox1,json  bbox2)
     {
-        // double x1 = (bbox1.value("x_min",0) + bbox1.value("x_max",0)) / 2;
-        // double y1 = (bbox1.value("y_min",0) + bbox1.value("y_max",0)) / 2;
-        // double x2 = (bbox2.value("x_min",0) + bbox2.value("x_max",0)) / 2;
-        // double y2 = (bbox2.value("y_min",0) + bbox2.value("y_max",0)) / 2;
+        LOG(INFO) << "get_distance called << " << bbox1.dump() << " bbox2: " << bbox2.dump();
         return std::sqrt(std::pow(bbox1.value("x",0.0) - bbox1.value("x",0.0), 2) + std::pow(bbox1.value("y",0.0) - bbox2.value("y",0.0), 2));
     }
     //--------------------------------------------------------------------------------
@@ -152,9 +149,10 @@ namespace copa {
                             tare_plate_dectected |= detection["label"] == "TARA";
 
                             detection["centroid"] = {
-                                (detection["bbox"].value("x_min",0) + detection["bbox"].value("x_max",0)) / 2,
-                                (detection["bbox"].value("y_min",0) + detection["bbox"].value("y_max",0)) / 2
+                                {"x", (detection["bbox"].value("x_min",0) + detection["bbox"].value("x_max",0)) / 2},
+                                {"y",(detection["bbox"].value("y_min",0) + detection["bbox"].value("y_max",0)) / 2}
                             };
+                            
                             if(class_id == m_node_components["expiration_date_class_id"])
                             {
                                 detection["type"] = "expiration_date";
@@ -172,11 +170,22 @@ namespace copa {
                                 found = true;
                                 double distance = get_distance(detection["centroid"], cutter_detection->get_centroid());
                                 LOG(INFO) << "distance: " << distance;
+
+                                //  if cutter_detection.get_type() == detection["type"] and distance < self.max_centroid_distance:
+                                // cutter_detection.add_ocr_detection(detection)
+                                // break
+
                                 //distance = math.dist(detection["centroid"], cutter_detection.get_centroid())
                                 // # if same detection
                                 // if cutter_detection.get_type() == detection["type"] and distance < self.max_centroid_distance:
                                 //     cutter_detection.add_ocr_detection(detection)
                                 //     breaks
+
+                                if(cutter_detection->get_type() == detection["type"] && distance < max_centroid_distance)
+                                {
+                                    cutter_detection->add_ocr_detection(detection);
+                                    break;
+                                }
                             }
 
                             if(!found) {

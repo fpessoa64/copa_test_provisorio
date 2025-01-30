@@ -43,6 +43,73 @@ private:
     }
 
     /**
+     
+    def sort_counter_clockwise(detections):
+
+    points = [get_center(detection["bbox"]) for detection in detections if get_center(detection["bbox"]) is not None]
+
+    if not points:
+        return [], None, None
+
+    center_x, center_y = get_center_of_the_circle(points)
+    angles = [np.arctan2(y - center_y, x - center_x) for x, y in points]
+    # if the center of the circle is to the left of the points, we need to add 2pi to the negative angles to make them positive, or the sort will be wrong
+    if center_x > np.mean([x for x, _ in points]):
+        angles = [angle + 2 * np.pi if angle < 0 else angle for angle in angles]
+
+    sorted_detections = [d for _, d in sorted(zip(angles, detections), key=lambda x: -x[0])]
+    return sorted_detections, center_x, center_y
+
+     */
+    void sort_counter_clockwise(json& detections) {
+        std::vector<json> points;
+        for (json& detection : detections) {
+            json center = get_center(detection["bbox"]);
+            if (!center.empty()) {
+                points.push_back(center);
+            }
+        }
+
+        if (points.empty()) {
+            return;
+        }
+
+        double center_x = 0;
+        double center_y = 0;
+        for (const auto& point : points) {
+            center_x += point["x"].get<double>();
+            center_y += point["y"].get<double>();
+        }
+        center_x /= points.size();
+        center_y /= points.size();
+
+        std::vector<double> angles;
+        for (const auto& point : points) {
+            double angle = std::atan2(point["y"].get<double>() - center_y, point["x"].get<double>() - center_x);
+            angles.push_back(angle);
+        }
+
+        if (center_x > std::accumulate(points.begin(), points.end(), 0.0, [](double sum, const json& point) {
+            return sum + point["x"].get<double>();
+        }) / points.size()) {
+            for (auto& angle : angles) {
+                if (angle < 0) {
+                    angle += 2 * M_PI;
+                }
+            }
+        }
+
+        std::vector<json> sorted_detections;
+        for (size_t i = 0; i < angles.size(); ++i) {
+            sorted_detections.push_back(detections[i]);
+        }
+    }
+
+        // std::sort(sorted_detections.begin(), sorted_detections.end(), [&angles](const json& a, const json& b) {
+        //     return angles[&a - &sorted_detections[0]] > angles[&b - &sorted_detections[0]];
+        // });
+
+    /**
      def remove_overlapping_detections(detections):
 
     if len(detections) < 2:
@@ -73,8 +140,8 @@ private:
             return a["confidence"].get<double>() > b["confidence"].get<double>();
         });
 
-        json filtered_detections;
-        json removed_detections;
+        json filtered_detections = json::array();
+        json removed_detections =   json::array();
         for (const auto& detection : detections) {
             bool is_overlapping = false;
             for (const auto& filtered_detection : filtered_detections) {
@@ -100,6 +167,8 @@ public:
         centroid = component_data["centroid"];
         add_ocr_detection(component_data);
         ocr_detections_list = json::array();
+
+        LOG(INFO) << "MainCutterDetection constructor centroid: " << centroid.dump();
 
     }
 
@@ -193,5 +262,23 @@ public:
             }
         }
         // Additional logic for "expiration_date" type can be implemented similarly.
+        // else if(type == "expiration_date") {
+        //    for (json ocr_detections : ocr_detections_list) {
+        //         std::tuple<json, json> result = remove_overlapping_detections(ocr_detections);
+        //         json filtered_detections = std::get<0>(result);
+        //         json removed_detections = std::get<1>(result);
+
+        //         // if len(filtered_detections) < 3:
+        //         //     continue
+        //         if (filtered_detections.size() < 3) {
+        //             continue;
+        //         }
+        //         //sorted_detections, center_x, center_y = sort_counter_clockwise(filtered_detections)
+        //         sort_counter_clockwise(filtered_detections)
+
+        //    }
+
+        // }
     }
+ 
 };

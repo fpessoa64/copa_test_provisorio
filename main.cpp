@@ -4,6 +4,85 @@
 #include <filesystem>
 #include "image.server.h"
 #include "manager.inspection.h"
+#include <Python.h>
+
+
+void call_python_class(const std::string &flow_data, const std::string &results)
+    {
+        // Py_Initialize(); // Inicializa o interpretador Python
+
+        PyObject *pName, *pModule, *pClass, *pInstance, *pFunc, *pArgs, *pValue;
+
+        PyRun_SimpleString("import sys; sys.path.append('../py')");
+
+        // Nome do arquivo Python (sem extensão .py)
+        pName = PyUnicode_DecodeFSDefault("test2"); // Nome do script Python
+        pModule = PyImport_Import(pName);                        // Importa o módulo
+        Py_DECREF(pName);
+
+        if (pModule != nullptr)
+        {
+            // Obtém a classe 'ConsolidateResults'
+            pClass = PyObject_GetAttrString(pModule, "ConsolidateResults");
+
+            if(pClass == nullptr)
+            {
+                PyErr_Print();
+                return;
+            }
+
+            if (pClass && PyCallable_Check(pClass))
+            {
+                // Chama o construtor da classe com o fluxo de dados
+                pArgs = PyTuple_Pack(1, PyUnicode_FromString(flow_data.c_str()));
+                pInstance = PyObject_CallObject(pClass, pArgs);
+                Py_DECREF(pArgs);
+
+                if (pInstance != nullptr)
+                {
+                    // Chama o método __call__ da classe 'ConsolidateResults'
+                    pFunc = PyObject_GetAttrString(pInstance, "__call__");
+
+                    if (pFunc && PyCallable_Check(pFunc))
+                    {
+                        // Passa o 'results' como argumento
+                        pArgs = PyTuple_Pack(1, PyUnicode_FromString(results.c_str()));
+                        pValue = PyObject_CallObject(pFunc, pArgs);
+                        Py_DECREF(pArgs);
+
+                        if (pValue != nullptr)
+                        {
+                            std::cout << "Resultado do Python: " << PyUnicode_AsUTF8(pValue) << std::endl;
+                            Py_DECREF(pValue);
+                        }
+                        else
+                        {
+                            PyErr_Print();
+                        }
+                    }
+                    else
+                    {
+                        PyErr_Print();
+                    }
+                    Py_DECREF(pFunc);
+                    Py_DECREF(pInstance);
+                }
+                else
+                {
+                    PyErr_Print();
+                }
+            }
+            Py_DECREF(pClass);
+            Py_DECREF(pModule);
+        }
+        else
+        {
+            PyErr_Print();
+        }
+
+        // Py_Finalize(); // Finaliza o interpretador Python
+    }
+
 
 void add_event(std::string path,std::string inspection_id,std::string image_id,copa::InspectionManager &inspectionManager) {
      for (const auto & entry : std::filesystem::directory_iterator(path))
@@ -20,6 +99,7 @@ void add_event(std::string path,std::string inspection_id,std::string image_id,c
 
 int main(int argc, char* argv[])
 {
+    Py_Initialize(); // Inicializa o interpretador Python
     // Create log directory if it doesn't exist
     std::cout << "Create log directory if it doesn't exist file: " << argv[0] <<  std::endl;
   // Diretório para armazenar logs
@@ -40,8 +120,15 @@ int main(int argc, char* argv[])
     FLAGS_alsologtostderr = true;   // Logs aparecem no console **e** no arquivo
     FLAGS_minloglevel = 0;   
 
-  
-    LOG(INFO) << "Hello, World 2!";
+    // std::ifstream file("/workspaces/c++/conf/671953f155784c001a41d0dc.json");
+    // if (!file.is_open())
+    // {
+    //     throw std::runtime_error("Could not open flow.json");
+    // }
+    // json flow_data = json::parse(file);
+    // file.close();
+
+    // call_python_class(flow_data.dump(),"teste");
 
     ///load json from  folder conf file parms.json
     std::ifstream i("/workspaces/c++/conf/parms.json");
@@ -53,8 +140,7 @@ int main(int argc, char* argv[])
 
     LOG(INFO) <<  "InspectionManager name: " << inspectionManager.get_name();
 
-    sleep(2);
-    
+  
     copa::ImageServer server("0.0.0.0", 8002);
     server.setupRoutes();
     server.start();
@@ -85,6 +171,7 @@ int main(int argc, char* argv[])
 
     google::ShutdownGoogleLogging();
 
+    Py_Finalize(); // Finaliza o interpretador Python
     return 0;
 
 }

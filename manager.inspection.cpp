@@ -30,6 +30,9 @@ namespace copa {
         m_inspections[inspectionId]->force_inspection(image_id,image_abs_id,image_border_id);
 
         std::cout << "InspectionManager  force_inspection: " << inspectionId << std::endl;
+
+        
+
       
     }
 

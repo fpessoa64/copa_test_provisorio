@@ -4,7 +4,6 @@ import math
 import datetime
 import logging as log
 
-#from eyeflow_sdk.log_obj import log
 import numpy as np
 import cv2
 
@@ -296,33 +295,6 @@ class MainCutterDetection:
                 if len(sorted_detections) == 3 and "X" not in [detection["class"] for detection in sorted_detections]:
                     sorted_detections.append({"class": "X", "confidence": 0})
 
-                # DEBUG ===========================================
-                # show_image = True
-                # if show_image:
-                #     offset = 300
-                #     # create image with points and show
-                #     image = np.zeros((1400, 1400, 3), dtype=np.uint8)
-                #     for index, detection in enumerate(removed_detections):
-                #         point = get_center(detection["bbox"])
-                #         cv2.circle(image, (int(point[0]) - offset, int(point[1]) - offset), 5, (0, 255, 255), -1)
-                #         cv2.putText(image, detection["class"], (int(point[0]) - offset - 10, int(point[1]) - offset + 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
-                #         cv2.putText(image, detection["class"], (20 * (index+1), 80), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
-
-                #     for index, detection in enumerate(sorted_detections):
-                #         if "bbox" in detection:
-                #             point = get_center(detection["bbox"])
-                #             cv2.circle(image, (int(point[0]) - offset, int(point[1]) - offset), 5, (0, 255, 0), -1)
-                #             cv2.putText(image, detection["class"], (int(point[0]) - offset - 10, int(point[1]) - offset + 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                #         cv2.putText(image, detection["class"], (20 * (index+1), 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-
-
-                #     # draw center
-                #     cv2.circle(image,  (int(center_x) - offset, int(center_y) - offset), 5, (255, 0, 0), -1)
-                #     cv2.imshow("image", image)
-                #     cv2.waitKey(0)
-                #     cv2.destroyAllWindows()
-                # DEBUG END =======================================
-
                 if len(sorted_detections) != 4:
                     continue
 
@@ -333,15 +305,15 @@ class MainCutterDetection:
 class ConsolidateResults:
 
 
-    def __init__(self, flow_data, main_cutter_name="CUTTER", cylinder_tare_ocr_name="OCR TARA", cylinder_expiration_date_ocr_name="OCR VENCIMENTO", tare_class_label="TARA", expiration_date_class_label="FERRADURA",color_class_label="COR BOTIJAO"):
+    def __init__(self, flow_data, main_cutter_name="CUTTER", cylinder_tare_ocr_name="TARA", cylinder_expiration_date_ocr_name="OCR VENCIMENTO", tare_class_label="TARA", expiration_date_class_label="FERRADURA",color_class_label="COR BOTIJAO"):
 
-        self.flow_data = flow_data
+        self.flow_data = json.loads(flow_data)
         self.main_cutter_name = main_cutter_name
         self.cylinder_tare_ocr_name = cylinder_tare_ocr_name
         self.cylinder_expiration_date_ocr_name = cylinder_expiration_date_ocr_name
         self.brands = []
         self.node_components = get_node_components_data(
-            flow_data,
+            self.flow_data,
             main_cutter_name=main_cutter_name,
             cylinder_tare_ocr_name=cylinder_tare_ocr_name,
             cylinder_expiration_date_ocr_name=cylinder_expiration_date_ocr_name,
@@ -354,10 +326,9 @@ class ConsolidateResults:
         self.max_centroid_distance = 100
 
   
-    def __call__(self, results):
+    def __call__(self, str_results):
 
-        log.info(f'results: {results}')
-      
+        results = json.loads(str_results)
     
         classifier_detections = {
             "color": {},
@@ -517,7 +488,8 @@ class ConsolidateResults:
 
         final_result["tare_plate_dectected"] = tare_plate_dectected 
         
-        return final_result
+        #return final_result
+        return json.dumps(final_result)
 
 
 if __name__ == "__main__":
@@ -535,58 +507,3 @@ if __name__ == "__main__":
     
     consolidate_results = ConsolidateResults(flow_data)
     final_result = consolidate_results(results)
-
-# if __name__ == "__main__":
-
-#     from test.tests_utils import get_log_data
-#     import cv2
-
-#     script_dir = os.path.dirname(os.path.realpath(__file__))
-#     results_dir = os.path.join(script_dir, "test", "results")
-#     log_data = get_log_data(os.path.join(script_dir, "test", "logs"), ["KC-20231129"])
-#     image_dir = "/opt/eyeflow/data/copa/fotos_20231129"
-#     # show_failed_images = True
-#     show_failed_images = False
-
-#     # flow_id = "6499aa26de3a0c001b73cf7c"    # Tara e Vencimento Dev https://app.eyeflow.ai/app/6099613b20da17001941822e/flow/6499aa26de3a0c001b73cf7c/edit
-#     flow_id = "632b68c276fafd001b164115"
-
-#     flow_file = os.path.join("/opt/eyeflow/data/flow", flow_id + ".json")
-#     with open(flow_file, 'r', newline='', encoding='utf8') as fp:
-#         flow_data = json.load(fp)
-
-#     consolidate_results = ConsolidateResults(flow_data)
-
-#     count_ok = 0
-#     count_nok = 0
-#     count_has_tare = 0
-#     for result_file in os.listdir(results_dir):
-#         file_id = result_file.split(".")[0]
-#         if file_id not in log_data:
-#             continue
-
-#         with open(os.path.join(results_dir, result_file), 'r', newline='', encoding='utf8') as fp:
-#             results = json.load(fp)
-#             final_result = consolidate_results(results)
-#             tare_consolidated = final_result["tare"]["consolidated_text"]
-#             expiratio_date_consolidated = final_result["expiration_date"]["consolidated_text"]
-#             text = final_result["tare"]["text"]
-#             tare_in_log = int(log_data[file_id]["tare"])
-
-#             if final_result["tare"]["cutter_detected"]:
-#                 count_has_tare += 1
-
-#             if tare_consolidated == tare_in_log or (text.endswith("5") and tare_consolidated + 1 == tare_in_log):
-#                 count_ok += 1
-#             else:
-#                 count_nok += 1
-#                 if show_failed_images:
-#                     image_file = os.path.join(image_dir, file_id + ".bmp")
-#                     image = cv2.imread(image_file)
-#                     cv2.imshow("image", image)
-#                     cv2.waitKey(0)
-#                     cv2.destroyAllWindows()
-#                     pass
-
-#     print(f"count_ok: {count_ok}. count_nok: {count_nok}. count_has_tare: {count_has_tare}")
-

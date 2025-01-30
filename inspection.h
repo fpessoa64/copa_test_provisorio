@@ -283,6 +283,7 @@ namespace copa
         void update_brand(std::string name, json &jsonData, const std::string &key, const json &newValue);
         void start_consolidation_thread(int consolidation_interval) ;
         void stop_consolidation_thread();
+        void call_python_class(const std::string &flow_data, const std::string &results);
     };
 };
 
